@@ -1,121 +1,175 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+import {useState, useEffect} from "react";
+import FilterTabs from "./components/FilterTabs";
+import ResourceCard from "./components/ResourceCard";
+import ResourceModal from "./components/ResourceModal";
+import SearchBar from "./components/SearchBar";
+import {
+  getAllResources,
+  getTodayHours,
+  getResourceHours,
+  getFavorites,
+  addFavorite,
+  removeFavorite,
+  getUserId,
+} from "./services/api";
+import "./App.css";
 
-function App() {
-  const [count, setCount] = useState(0)
+function App(){
+  const [resources, setResources] = useState([]);
+  const [todayHours, setTodayHours] = useState({});
+  const [favoriteIds, setFavoriteIds] = useState([]);
+  const [activeTab, setActiveTab] = useState("all");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedResource, setSelectedResource] = useState(null);
+  const [selectedHours, setSelectedHours] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  const userId = getUserId();
+  useEffect(() => {
+    async function loadData() {
+      try {
+        const [resourceData, hoursData, favData] = await Promise.all([
+          getAllResources(),
+          getTodayHours(),
+          getFavorites(userId),
+        ]);
+
+        setResources(resourceData);
+
+        const hoursMap = {};
+        hoursData.forEach((h) => {
+          hoursMap[h.resource_id] = h;
+        });
+        setTodayHours(hoursMap);
+
+        setFavoriteIds(favData.map((f) => f.id));
+        setLoading(false);
+      } catch (err) {
+        console.error("Failed to load data:", err);
+        setError("Failed to load data. Is the backend running?");
+        setLoading(false);
+      }
+    }
+    loadData();
+  }, []);
+
+  async function handleToggleFavorite(resourceId) {
+    try {
+      if (favoriteIds.includes(resourceId)) {
+        await removeFavorite(userId, resourceId);
+        setFavoriteIds(favoriteIds.filter((id) => id !== resourceId));
+      } else {
+        await addFavorite(userId, resourceId);
+        setFavoriteIds([...favoriteIds, resourceId]);
+      }
+    } catch (err) {
+      console.error("Failed to toggle favorite:", err);
+    }
+  }
+
+  async function handleCardClick(resource) {
+    try {
+      const hours = await getResourceHours(resource.id);
+      setSelectedHours(hours);
+      setSelectedResource(resource);
+    } catch (err) {
+      console.error("Failed to load hours:", err);
+    }
+  }
+  function getFilteredResources() {
+    let filtered = resources;
+
+    if (activeTab === "favorites") {
+      filtered = filtered.filter((r) => favoriteIds.includes(r.id));
+    } else if (activeTab === "open_now") {
+      filtered = filtered.filter((r) => {
+        const hours = todayHours[r.id];
+        if (!hours || hours.is_closed) return false;
+
+        const now = new Date();
+        const [openH, openM] = hours.open_time.split(":").map(Number);
+        const [closeH, closeM] = hours.close_time.split(":").map(Number);
+
+        const openDate = new Date();
+        openDate.setHours(openH, openM, 0);
+        const closeDate = new Date();
+        closeDate.setHours(closeH, closeM, 0);
+
+        return now >= openDate && now < closeDate;
+      });
+    } else if (activeTab !== "all") {
+      filtered = filtered.filter((r) => r.type === activeTab);
+    }
+
+    if (searchQuery) {
+      filtered = filtered.filter((r) =>
+        r.name.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+    }
+
+    return filtered;
+  }
+
+  if (loading) {
+    return (
+      <div className="app">
+        <div className="loading">Loading campus resources...</div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="app">
+        <div className="error">{error}</div>
+      </div>
+    );
+  }
+
+  const filtered = getFilteredResources();
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+    <div className="app">
+      <header className="app-header">
+        <h1>UW Campus Resources</h1>
+        <p className="app-subtitle">Find buildings, libraries, and hours</p>
+      </header>
 
-      <div className="ticks"></div>
+      <FilterTabs activeTab={activeTab} onTabChange={setActiveTab} />
+      <SearchBar value={searchQuery} onChange={setSearchQuery} />
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
+      <div className="resource-grid">
+        {filtered.length > 0 ? (
+          filtered.map((resource) => (
+            <ResourceCard
+              key={resource.id}
+              resource={resource}
+              todayHours={todayHours[resource.id]}
+              isFavorite={favoriteIds.includes(resource.id)}
+              onToggleFavorite={handleToggleFavorite}
+              onClick={() => handleCardClick(resource)}
+            />
+          ))
+        ) : (
+          <div className="empty-state">
+            <p>No resources found</p>
+          </div>
+        )}
+      </div>
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+      {selectedResource && (
+        <ResourceModal
+          resource={selectedResource}
+          hours={selectedHours}
+          onClose={() => setSelectedResource(null)}
+        />
+      )}
+    </div>
+  );
 }
 
-export default App
+export default App;
+
+
+
