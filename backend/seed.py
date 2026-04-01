@@ -119,8 +119,8 @@ def seed():
         ("Wednesday", "08:00", "18:00", False),
         ("Thursday", "08:00", "18:00", False),
         ("Friday", "08:00", "17:00", False),
-        ("Saturday", "Closed", "Closed", True),
-        ("Sunday", "Closed", "Closed", True),
+        ("Saturday", None, None, True),
+        ("Sunday", None, None, True),
     ]
 
     for day, open_time, close_time, is_closed in foster_hours:

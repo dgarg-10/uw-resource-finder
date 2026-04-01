@@ -24,3 +24,5 @@ const FilterTabs = ({activeTab, onTabChange}) => {
         </div>
     )
 }
+
+export default FilterTabs

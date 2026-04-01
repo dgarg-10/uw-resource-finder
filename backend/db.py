@@ -34,7 +34,7 @@ def get_all_resources() -> list:
         for row in rows
     ]
 
-def get_resource_by_id(id) -> list:
+def get_resource_by_id(id) -> dict | None:
     """
         Returns a specific resource based on the id that is given, in the provided format
     """
