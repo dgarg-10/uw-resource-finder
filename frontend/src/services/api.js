@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:5001curl http://localhost:5001/api/resources/api";
+const API_URL = "http://localhost:5001/api";
 
 
 export function getUserId(){

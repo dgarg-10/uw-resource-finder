@@ -335,9 +335,15 @@ body {
 }
 
 .modal-location {
-  color: var(--text-secondary);
+  color: var(--accent-gold);
   font-size: 0.9rem;
   margin-top: 10px;
+  text-decoration: underline;
+  display: inline-block;
+}
+
+.modal-location:hover {
+  color: lightcoral
 }
 
 .modal-description {

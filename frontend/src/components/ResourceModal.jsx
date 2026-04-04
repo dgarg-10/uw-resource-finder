@@ -1,6 +1,6 @@
 function ResourceModal({ resource, hours, onClose }) {
     if (!resource) return null;
-  
+    const directionsURL = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(resource.name + " University of Washington Seattle")}`;
     const dayOrder = [
       "Monday",
       "Tuesday",
@@ -26,9 +26,19 @@ function ResourceModal({ resource, hours, onClose }) {
           </button>
           <h2 className="modal-title">{resource.name}</h2>
           <span className={`type-badge ${resource.type}`}>{resource.type}</span>
+
           {resource.location && (
-            <p className="modal-location">📍 {resource.location}</p>
+            <a
+            className="modal-location"
+            href={directionsURL}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={(e) => e.stopPropagation()}
+            >
+            📍 {resource.location} — Get Directions
+            </a>
           )}
+
           {resource.description && (
             <p className="modal-description">{resource.description}</p>
           )}

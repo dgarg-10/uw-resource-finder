@@ -447,109 +447,113 @@ def seed():
 
     # --- Academic Buildings ---
 
+    # --- Academic Buildings ---
+
+    # Anderson Hall
     cursor.execute(
         "INSERT INTO resources (name, type, location, description) VALUES (%s, %s, %s, %s) RETURNING id",
-        ("Paul G. Allen Center (CSE)", "academic", "Central Campus",
-         "Home of the Paul G. Allen School of Computer Science and Engineering")
+        ("Anderson Hall", "academic", "Central Campus",
+         "Houses the College of Forest Resources and environmental science programs")
     )
-    cse_id = cursor.fetchone()[0]
+    anderson_id = cursor.fetchone()[0]
 
-    cse_hours = [
+    anderson_hours = [
         ("Monday", "07:00", "21:00", False),
         ("Tuesday", "07:00", "21:00", False),
         ("Wednesday", "07:00", "21:00", False),
         ("Thursday", "07:00", "21:00", False),
-        ("Friday", "07:00", "18:00", False),
-        ("Saturday", "09:00", "17:00", False),
-        ("Sunday", None, None, True),
-    ]
-
-    for day, open_time, close_time, is_closed in cse_hours:
-        cursor.execute(
-            "INSERT INTO hours (resource_id, day_of_week, open_time, close_time, is_closed) VALUES (%s, %s, %s, %s, %s)",
-            (cse_id, day, open_time, close_time, is_closed)
-        )
-
-    cursor.execute(
-        "INSERT INTO resources (name, type, location, description) VALUES (%s, %s, %s, %s) RETURNING id",
-        ("Bill & Melinda Gates Center (CSE2)", "academic", "Central Campus",
-         "Second building of the Paul G. Allen School, and is open 24/7 for all CSE students through Husky ID")
-    )
-    gates_id = cursor.fetchone()[0]
-
-    gates_hours = [
-        ("Monday", "07:00", "21:00", False),
-        ("Tuesday", "07:00", "21:00", False),
-        ("Wednesday", "07:00", "21:00", False),
-        ("Thursday", "07:00", "21:00", False),
-        ("Friday", "07:00", "18:00", False),
-        ("Saturday", "09:00", "17:00", False),
-        ("Sunday", None, None, True),
-    ]
-
-    for day, open_time, close_time, is_closed in gates_hours:
-        cursor.execute(
-            "INSERT INTO hours (resource_id, day_of_week, open_time, close_time, is_closed) VALUES (%s, %s, %s, %s, %s)",
-            (gates_id, day, open_time, close_time, is_closed)
-        )
-
-    # Mary Gates Hall
-    cursor.execute(
-        "INSERT INTO resources (name, type, location, description) VALUES (%s, %s, %s, %s) RETURNING id",
-        ("Mary Gates Hall", "academic", "Central Campus",
-         "Academic building with classrooms, advising offices, and the Center for Experiential Learning")
-    )
-    mgh_id = cursor.fetchone()[0]
-
-    mgh_hours = [
-        ("Monday", "07:00", "22:00", False),
-        ("Tuesday", "07:00", "22:00", False),
-        ("Wednesday", "07:00", "22:00", False),
-        ("Thursday", "07:00", "22:00", False),
-        ("Friday", "07:00", "18:00", False),
-        ("Saturday", "09:00", "17:00", False),
-        ("Sunday", None, None, True),
-    ]
-
-    for day, open_time, close_time, is_closed in mgh_hours:
-        cursor.execute(
-            "INSERT INTO hours (resource_id, day_of_week, open_time, close_time, is_closed) VALUES (%s, %s, %s, %s, %s)",
-            (mgh_id, day, open_time, close_time, is_closed)
-        )
-
-    # Kane Hall
-    cursor.execute(
-        "INSERT INTO resources (name, type, location, description) VALUES (%s, %s, %s, %s) RETURNING id",
-        ("Kane Hall", "academic", "Central Campus",
-         "Large lecture hall building near Red Square with auditorium-style classrooms")
-    )
-    kane_id = cursor.fetchone()[0]
-
-    kane_hours = [
-        ("Monday", "07:00", "22:00", False),
-        ("Tuesday", "07:00", "22:00", False),
-        ("Wednesday", "07:00", "22:00", False),
-        ("Thursday", "07:00", "22:00", False),
         ("Friday", "07:00", "18:00", False),
         ("Saturday", None, None, True),
         ("Sunday", None, None, True),
     ]
 
-    for day, open_time, close_time, is_closed in kane_hours:
+    for day, open_time, close_time, is_closed in anderson_hours:
         cursor.execute(
             "INSERT INTO hours (resource_id, day_of_week, open_time, close_time, is_closed) VALUES (%s, %s, %s, %s, %s)",
-            (kane_id, day, open_time, close_time, is_closed)
+            (anderson_id, day, open_time, close_time, is_closed)
         )
 
-    # Savery Hall
+    # Architecture Hall
     cursor.execute(
         "INSERT INTO resources (name, type, location, description) VALUES (%s, %s, %s, %s) RETURNING id",
-        ("Savery Hall", "academic", "Central Campus",
-         "Houses political science, sociology, and other social science departments")
+        ("Architecture Hall", "academic", "Central Campus",
+         "Home to the College of Built Environments including architecture and landscape architecture")
     )
-    savery_id = cursor.fetchone()[0]
+    arch_id = cursor.fetchone()[0]
 
-    savery_hours = [
+    arch_hours = [
+        ("Monday", "07:00", "22:00", False),
+        ("Tuesday", "07:00", "22:00", False),
+        ("Wednesday", "07:00", "22:00", False),
+        ("Thursday", "07:00", "22:00", False),
+        ("Friday", "07:00", "18:00", False),
+        ("Saturday", "09:00", "17:00", False),
+        ("Sunday", None, None, True),
+    ]
+
+    for day, open_time, close_time, is_closed in arch_hours:
+        cursor.execute(
+            "INSERT INTO hours (resource_id, day_of_week, open_time, close_time, is_closed) VALUES (%s, %s, %s, %s, %s)",
+            (arch_id, day, open_time, close_time, is_closed)
+        )
+
+    # Art Building
+    cursor.execute(
+        "INSERT INTO resources (name, type, location, description) VALUES (%s, %s, %s, %s) RETURNING id",
+        ("Art Building", "academic", "West Campus",
+         "Houses the School of Art + Art History + Design with studios and gallery spaces")
+    )
+    art_id = cursor.fetchone()[0]
+
+    art_hours = [
+        ("Monday", "07:00", "21:00", False),
+        ("Tuesday", "07:00", "21:00", False),
+        ("Wednesday", "07:00", "21:00", False),
+        ("Thursday", "07:00", "21:00", False),
+        ("Friday", "07:00", "18:00", False),
+        ("Saturday", None, None, True),
+        ("Sunday", None, None, True),
+    ]
+
+    for day, open_time, close_time, is_closed in art_hours:
+        cursor.execute(
+            "INSERT INTO hours (resource_id, day_of_week, open_time, close_time, is_closed) VALUES (%s, %s, %s, %s, %s)",
+            (art_id, day, open_time, close_time, is_closed)
+        )
+
+    # Bagley Hall
+    cursor.execute(
+        "INSERT INTO resources (name, type, location, description) VALUES (%s, %s, %s, %s) RETURNING id",
+        ("Bagley Hall", "academic", "Central Campus",
+         "Chemistry building with lecture halls, teaching labs, and research facilities")
+    )
+    bagley_id = cursor.fetchone()[0]
+
+    bagley_hours = [
+        ("Monday", "07:00", "21:30", False),
+        ("Tuesday", "07:00", "21:30", False),
+        ("Wednesday", "07:00", "21:30", False),
+        ("Thursday", "07:00", "21:30", False),
+        ("Friday", "07:00", "18:00", False),
+        ("Saturday", None, None, True),
+        ("Sunday", None, None, True),
+    ]
+
+    for day, open_time, close_time, is_closed in bagley_hours:
+        cursor.execute(
+            "INSERT INTO hours (resource_id, day_of_week, open_time, close_time, is_closed) VALUES (%s, %s, %s, %s, %s)",
+            (bagley_id, day, open_time, close_time, is_closed)
+        )
+
+    # Benson Hall
+    cursor.execute(
+        "INSERT INTO resources (name, type, location, description) VALUES (%s, %s, %s, %s) RETURNING id",
+        ("Benson Hall", "academic", "Central Campus",
+         "Houses Chemical Engineering and Materials Science & Engineering departments")
+    )
+    benson_id = cursor.fetchone()[0]
+
+    benson_hours = [
         ("Monday", "07:00", "21:00", False),
         ("Tuesday", "07:00", "21:00", False),
         ("Wednesday", "07:00", "21:00", False),
@@ -559,10 +563,850 @@ def seed():
         ("Sunday", None, None, True),
     ]
 
-    for day, open_time, close_time, is_closed in savery_hours:
+    for day, open_time, close_time, is_closed in benson_hours:
         cursor.execute(
             "INSERT INTO hours (resource_id, day_of_week, open_time, close_time, is_closed) VALUES (%s, %s, %s, %s, %s)",
-            (savery_id, day, open_time, close_time, is_closed)
+            (benson_id, day, open_time, close_time, is_closed)
+        )
+
+    # Clark Hall
+    cursor.execute(
+        "INSERT INTO resources (name, type, location, description) VALUES (%s, %s, %s, %s) RETURNING id",
+        ("Clark Hall", "academic", "North Campus",
+         "Residence hall and classroom space on north campus")
+    )
+    clark_id = cursor.fetchone()[0]
+
+    clark_hours = [
+        ("Monday", "07:00", "21:00", False),
+        ("Tuesday", "07:00", "21:00", False),
+        ("Wednesday", "07:00", "21:00", False),
+        ("Thursday", "07:00", "21:00", False),
+        ("Friday", "07:00", "17:00", False),
+        ("Saturday", None, None, True),
+        ("Sunday", None, None, True),
+    ]
+
+    for day, open_time, close_time, is_closed in clark_hours:
+        cursor.execute(
+            "INSERT INTO hours (resource_id, day_of_week, open_time, close_time, is_closed) VALUES (%s, %s, %s, %s, %s)",
+            (clark_id, day, open_time, close_time, is_closed)
+        )
+
+    # Communications Building (CMU)
+    cursor.execute(
+        "INSERT INTO resources (name, type, location, description) VALUES (%s, %s, %s, %s) RETURNING id",
+        ("Communications Building", "academic", "Central Campus",
+         "Home to the Department of Communication and related programs")
+    )
+    cmu_id = cursor.fetchone()[0]
+
+    cmu_hours = [
+        ("Monday", "07:00", "21:00", False),
+        ("Tuesday", "07:00", "21:00", False),
+        ("Wednesday", "07:00", "21:00", False),
+        ("Thursday", "07:00", "21:00", False),
+        ("Friday", "07:00", "17:00", False),
+        ("Saturday", None, None, True),
+        ("Sunday", None, None, True),
+    ]
+
+    for day, open_time, close_time, is_closed in cmu_hours:
+        cursor.execute(
+            "INSERT INTO hours (resource_id, day_of_week, open_time, close_time, is_closed) VALUES (%s, %s, %s, %s, %s)",
+            (cmu_id, day, open_time, close_time, is_closed)
+        )
+
+    # Condon Hall
+    cursor.execute(
+        "INSERT INTO resources (name, type, location, description) VALUES (%s, %s, %s, %s) RETURNING id",
+        ("Condon Hall", "academic", "West Campus",
+         "Former law school building, now houses various academic departments and offices")
+    )
+    condon_id = cursor.fetchone()[0]
+
+    condon_hours = [
+        ("Monday", "07:00", "21:00", False),
+        ("Tuesday", "07:00", "21:00", False),
+        ("Wednesday", "07:00", "21:00", False),
+        ("Thursday", "07:00", "21:00", False),
+        ("Friday", "07:00", "17:00", False),
+        ("Saturday", None, None, True),
+        ("Sunday", None, None, True),
+    ]
+
+    for day, open_time, close_time, is_closed in condon_hours:
+        cursor.execute(
+            "INSERT INTO hours (resource_id, day_of_week, open_time, close_time, is_closed) VALUES (%s, %s, %s, %s, %s)",
+            (condon_id, day, open_time, close_time, is_closed)
+        )
+
+    # Denny Hall
+    cursor.execute(
+        "INSERT INTO resources (name, type, location, description) VALUES (%s, %s, %s, %s) RETURNING id",
+        ("Denny Hall", "academic", "Central Campus",
+         "Oldest building on campus (1895), houses the Classics and Near Eastern Languages departments")
+    )
+    denny_id = cursor.fetchone()[0]
+
+    denny_hours = [
+        ("Monday", "07:00", "21:00", False),
+        ("Tuesday", "07:00", "21:00", False),
+        ("Wednesday", "07:00", "21:00", False),
+        ("Thursday", "07:00", "21:00", False),
+        ("Friday", "07:00", "17:00", False),
+        ("Saturday", None, None, True),
+        ("Sunday", None, None, True),
+    ]
+
+    for day, open_time, close_time, is_closed in denny_hours:
+        cursor.execute(
+            "INSERT INTO hours (resource_id, day_of_week, open_time, close_time, is_closed) VALUES (%s, %s, %s, %s, %s)",
+            (denny_id, day, open_time, close_time, is_closed)
+        )
+
+    # Eagleson Hall
+    cursor.execute(
+        "INSERT INTO resources (name, type, location, description) VALUES (%s, %s, %s, %s) RETURNING id",
+        ("Eagleson Hall", "academic", "West Campus",
+         "Houses academic offices and classroom spaces")
+    )
+    eagleson_id = cursor.fetchone()[0]
+
+    eagleson_hours = [
+        ("Monday", "07:00", "21:00", False),
+        ("Tuesday", "07:00", "21:00", False),
+        ("Wednesday", "07:00", "21:00", False),
+        ("Thursday", "07:00", "21:00", False),
+        ("Friday", "07:00", "17:00", False),
+        ("Saturday", None, None, True),
+        ("Sunday", None, None, True),
+    ]
+
+    for day, open_time, close_time, is_closed in eagleson_hours:
+        cursor.execute(
+            "INSERT INTO hours (resource_id, day_of_week, open_time, close_time, is_closed) VALUES (%s, %s, %s, %s, %s)",
+            (eagleson_id, day, open_time, close_time, is_closed)
+        )
+
+    # Electrical Engineering Building
+    cursor.execute(
+        "INSERT INTO resources (name, type, location, description) VALUES (%s, %s, %s, %s) RETURNING id",
+        ("Electrical & Computer Engineering Building", "academic", "Central Campus",
+         "Home to the Electrical and Computer Engineering department with labs and classrooms")
+    )
+    eeb_id = cursor.fetchone()[0]
+
+    eeb_hours = [
+        ("Monday", "07:00", "21:30", False),
+        ("Tuesday", "07:00", "21:30", False),
+        ("Wednesday", "07:00", "21:30", False),
+        ("Thursday", "07:00", "21:30", False),
+        ("Friday", "07:00", "18:00", False),
+        ("Saturday", "09:00", "17:00", False),
+        ("Sunday", None, None, True),
+    ]
+
+    for day, open_time, close_time, is_closed in eeb_hours:
+        cursor.execute(
+            "INSERT INTO hours (resource_id, day_of_week, open_time, close_time, is_closed) VALUES (%s, %s, %s, %s, %s)",
+            (eeb_id, day, open_time, close_time, is_closed)
+        )
+
+    # Engineering Annex
+    cursor.execute(
+        "INSERT INTO resources (name, type, location, description) VALUES (%s, %s, %s, %s) RETURNING id",
+        ("Engineering Annex", "academic", "Central Campus",
+         "Additional engineering classrooms and lab spaces")
+    )
+    ega_id = cursor.fetchone()[0]
+
+    ega_hours = [
+        ("Monday", "07:00", "21:00", False),
+        ("Tuesday", "07:00", "21:00", False),
+        ("Wednesday", "07:00", "21:00", False),
+        ("Thursday", "07:00", "21:00", False),
+        ("Friday", "07:00", "17:00", False),
+        ("Saturday", None, None, True),
+        ("Sunday", None, None, True),
+    ]
+
+    for day, open_time, close_time, is_closed in ega_hours:
+        cursor.execute(
+            "INSERT INTO hours (resource_id, day_of_week, open_time, close_time, is_closed) VALUES (%s, %s, %s, %s, %s)",
+            (ega_id, day, open_time, close_time, is_closed)
+        )
+
+    # Gerberding Hall
+    cursor.execute(
+        "INSERT INTO resources (name, type, location, description) VALUES (%s, %s, %s, %s) RETURNING id",
+        ("Gerberding Hall", "academic", "Central Campus",
+         "Main administration building housing the Office of the President and Provost")
+    )
+    gerberding_id = cursor.fetchone()[0]
+
+    gerberding_hours = [
+        ("Monday", "07:30", "17:00", False),
+        ("Tuesday", "07:30", "17:00", False),
+        ("Wednesday", "07:30", "17:00", False),
+        ("Thursday", "07:30", "17:00", False),
+        ("Friday", "07:30", "17:00", False),
+        ("Saturday", None, None, True),
+        ("Sunday", None, None, True),
+    ]
+
+    for day, open_time, close_time, is_closed in gerberding_hours:
+        cursor.execute(
+            "INSERT INTO hours (resource_id, day_of_week, open_time, close_time, is_closed) VALUES (%s, %s, %s, %s, %s)",
+            (gerberding_id, day, open_time, close_time, is_closed)
+        )
+
+    # Gould Hall
+    cursor.execute(
+        "INSERT INTO resources (name, type, location, description) VALUES (%s, %s, %s, %s) RETURNING id",
+        ("Gould Hall", "academic", "Central Campus",
+         "College of Built Environments including urban design and planning programs")
+    )
+    gould_id = cursor.fetchone()[0]
+
+    gould_hours = [
+        ("Monday", "07:00", "22:00", False),
+        ("Tuesday", "07:00", "22:00", False),
+        ("Wednesday", "07:00", "22:00", False),
+        ("Thursday", "07:00", "22:00", False),
+        ("Friday", "07:00", "18:00", False),
+        ("Saturday", "09:00", "17:00", False),
+        ("Sunday", None, None, True),
+    ]
+
+    for day, open_time, close_time, is_closed in gould_hours:
+        cursor.execute(
+            "INSERT INTO hours (resource_id, day_of_week, open_time, close_time, is_closed) VALUES (%s, %s, %s, %s, %s)",
+            (gould_id, day, open_time, close_time, is_closed)
+        )
+
+    # Gowen Hall
+    cursor.execute(
+        "INSERT INTO resources (name, type, location, description) VALUES (%s, %s, %s, %s) RETURNING id",
+        ("Gowen Hall", "academic", "Central Campus",
+         "Houses the Jackson School of International Studies and History department")
+    )
+    gowen_id = cursor.fetchone()[0]
+
+    gowen_hours = [
+        ("Monday", "07:00", "21:00", False),
+        ("Tuesday", "07:00", "21:00", False),
+        ("Wednesday", "07:00", "21:00", False),
+        ("Thursday", "07:00", "21:00", False),
+        ("Friday", "07:00", "17:00", False),
+        ("Saturday", None, None, True),
+        ("Sunday", None, None, True),
+    ]
+
+    for day, open_time, close_time, is_closed in gowen_hours:
+        cursor.execute(
+            "INSERT INTO hours (resource_id, day_of_week, open_time, close_time, is_closed) VALUES (%s, %s, %s, %s, %s)",
+            (gowen_id, day, open_time, close_time, is_closed)
+        )
+
+    # Guggenheim Hall
+    cursor.execute(
+        "INSERT INTO resources (name, type, location, description) VALUES (%s, %s, %s, %s) RETURNING id",
+        ("Guggenheim Hall", "academic", "Central Campus",
+         "Home to the Department of Aeronautics and Astronautics")
+    )
+    guggenheim_id = cursor.fetchone()[0]
+
+    guggenheim_hours = [
+        ("Monday", "07:00", "21:00", False),
+        ("Tuesday", "07:00", "21:00", False),
+        ("Wednesday", "07:00", "21:00", False),
+        ("Thursday", "07:00", "21:00", False),
+        ("Friday", "07:00", "18:00", False),
+        ("Saturday", None, None, True),
+        ("Sunday", None, None, True),
+    ]
+
+    for day, open_time, close_time, is_closed in guggenheim_hours:
+        cursor.execute(
+            "INSERT INTO hours (resource_id, day_of_week, open_time, close_time, is_closed) VALUES (%s, %s, %s, %s, %s)",
+            (guggenheim_id, day, open_time, close_time, is_closed)
+        )
+
+    # Guthrie Hall
+    cursor.execute(
+        "INSERT INTO resources (name, type, location, description) VALUES (%s, %s, %s, %s) RETURNING id",
+        ("Guthrie Hall", "academic", "Central Campus",
+         "Houses the Department of Psychology with research labs and classrooms")
+    )
+    guthrie_id = cursor.fetchone()[0]
+
+    guthrie_hours = [
+        ("Monday", "07:00", "21:30", False),
+        ("Tuesday", "07:00", "21:30", False),
+        ("Wednesday", "07:00", "21:30", False),
+        ("Thursday", "07:00", "21:30", False),
+        ("Friday", "07:00", "18:00", False),
+        ("Saturday", None, None, True),
+        ("Sunday", None, None, True),
+    ]
+
+    for day, open_time, close_time, is_closed in guthrie_hours:
+        cursor.execute(
+            "INSERT INTO hours (resource_id, day_of_week, open_time, close_time, is_closed) VALUES (%s, %s, %s, %s, %s)",
+            (guthrie_id, day, open_time, close_time, is_closed)
+        )
+
+    # Henderson Hall
+    cursor.execute(
+        "INSERT INTO resources (name, type, location, description) VALUES (%s, %s, %s, %s) RETURNING id",
+        ("Henderson Hall", "academic", "West Campus",
+         "Academic building with classrooms and departmental offices")
+    )
+    henderson_id = cursor.fetchone()[0]
+
+    henderson_hours = [
+        ("Monday", "07:00", "21:00", False),
+        ("Tuesday", "07:00", "21:00", False),
+        ("Wednesday", "07:00", "21:00", False),
+        ("Thursday", "07:00", "21:00", False),
+        ("Friday", "07:00", "17:00", False),
+        ("Saturday", None, None, True),
+        ("Sunday", None, None, True),
+    ]
+
+    for day, open_time, close_time, is_closed in henderson_hours:
+        cursor.execute(
+            "INSERT INTO hours (resource_id, day_of_week, open_time, close_time, is_closed) VALUES (%s, %s, %s, %s, %s)",
+            (henderson_id, day, open_time, close_time, is_closed)
+        )
+
+    # Hitchcock Hall
+    cursor.execute(
+        "INSERT INTO resources (name, type, location, description) VALUES (%s, %s, %s, %s) RETURNING id",
+        ("Hitchcock Hall", "academic", "Central Campus",
+         "Houses the Department of Biology with teaching and research labs")
+    )
+    hitchcock_id = cursor.fetchone()[0]
+
+    hitchcock_hours = [
+        ("Monday", "07:00", "21:30", False),
+        ("Tuesday", "07:00", "21:30", False),
+        ("Wednesday", "07:00", "21:30", False),
+        ("Thursday", "07:00", "21:30", False),
+        ("Friday", "07:00", "18:00", False),
+        ("Saturday", None, None, True),
+        ("Sunday", None, None, True),
+    ]
+
+    for day, open_time, close_time, is_closed in hitchcock_hours:
+        cursor.execute(
+            "INSERT INTO hours (resource_id, day_of_week, open_time, close_time, is_closed) VALUES (%s, %s, %s, %s, %s)",
+            (hitchcock_id, day, open_time, close_time, is_closed)
+        )
+
+    # Hutchinson Hall
+    cursor.execute(
+        "INSERT INTO resources (name, type, location, description) VALUES (%s, %s, %s, %s) RETURNING id",
+        ("Hutchinson Hall", "academic", "West Campus",
+         "Home to the School of Drama with performance and rehearsal spaces")
+    )
+    hutchinson_id = cursor.fetchone()[0]
+
+    hutchinson_hours = [
+        ("Monday", "07:00", "22:00", False),
+        ("Tuesday", "07:00", "22:00", False),
+        ("Wednesday", "07:00", "22:00", False),
+        ("Thursday", "07:00", "22:00", False),
+        ("Friday", "07:00", "22:00", False),
+        ("Saturday", "09:00", "22:00", False),
+        ("Sunday", "12:00", "22:00", False),
+    ]
+
+    for day, open_time, close_time, is_closed in hutchinson_hours:
+        cursor.execute(
+            "INSERT INTO hours (resource_id, day_of_week, open_time, close_time, is_closed) VALUES (%s, %s, %s, %s, %s)",
+            (hutchinson_id, day, open_time, close_time, is_closed)
+        )
+
+    # Johnson Hall
+    cursor.execute(
+        "INSERT INTO resources (name, type, location, description) VALUES (%s, %s, %s, %s) RETURNING id",
+        ("Johnson Hall", "academic", "Central Campus",
+         "Houses the Department of Earth and Space Sciences with labs and classrooms")
+    )
+    johnson_id = cursor.fetchone()[0]
+
+    johnson_hours = [
+        ("Monday", "07:00", "21:00", False),
+        ("Tuesday", "07:00", "21:00", False),
+        ("Wednesday", "07:00", "21:00", False),
+        ("Thursday", "07:00", "21:00", False),
+        ("Friday", "07:00", "17:00", False),
+        ("Saturday", None, None, True),
+        ("Sunday", None, None, True),
+    ]
+
+    for day, open_time, close_time, is_closed in johnson_hours:
+        cursor.execute(
+            "INSERT INTO hours (resource_id, day_of_week, open_time, close_time, is_closed) VALUES (%s, %s, %s, %s, %s)",
+            (johnson_id, day, open_time, close_time, is_closed)
+        )
+
+    # Loew Hall
+    cursor.execute(
+        "INSERT INTO resources (name, type, location, description) VALUES (%s, %s, %s, %s) RETURNING id",
+        ("Loew Hall", "academic", "Central Campus",
+         "Civil and Environmental Engineering building with labs and classrooms")
+    )
+    loew_id = cursor.fetchone()[0]
+
+    loew_hours = [
+        ("Monday", "07:00", "21:00", False),
+        ("Tuesday", "07:00", "21:00", False),
+        ("Wednesday", "07:00", "21:00", False),
+        ("Thursday", "07:00", "21:00", False),
+        ("Friday", "07:00", "18:00", False),
+        ("Saturday", None, None, True),
+        ("Sunday", None, None, True),
+    ]
+
+    for day, open_time, close_time, is_closed in loew_hours:
+        cursor.execute(
+            "INSERT INTO hours (resource_id, day_of_week, open_time, close_time, is_closed) VALUES (%s, %s, %s, %s, %s)",
+            (loew_id, day, open_time, close_time, is_closed)
+        )
+
+    # Mechanical Engineering Building
+    cursor.execute(
+        "INSERT INTO resources (name, type, location, description) VALUES (%s, %s, %s, %s) RETURNING id",
+        ("Mechanical Engineering Building", "academic", "Central Campus",
+         "Home to the Mechanical Engineering department with machine shops and labs")
+    )
+    meb_id = cursor.fetchone()[0]
+
+    meb_hours = [
+        ("Monday", "07:00", "21:00", False),
+        ("Tuesday", "07:00", "21:00", False),
+        ("Wednesday", "07:00", "21:00", False),
+        ("Thursday", "07:00", "21:00", False),
+        ("Friday", "07:00", "18:00", False),
+        ("Saturday", None, None, True),
+        ("Sunday", None, None, True),
+    ]
+
+    for day, open_time, close_time, is_closed in meb_hours:
+        cursor.execute(
+            "INSERT INTO hours (resource_id, day_of_week, open_time, close_time, is_closed) VALUES (%s, %s, %s, %s, %s)",
+            (meb_id, day, open_time, close_time, is_closed)
+        )
+
+    # Miller Hall
+    cursor.execute(
+        "INSERT INTO resources (name, type, location, description) VALUES (%s, %s, %s, %s) RETURNING id",
+        ("Miller Hall", "academic", "Central Campus",
+         "Houses the College of Education with classrooms and faculty offices")
+    )
+    miller_id = cursor.fetchone()[0]
+
+    miller_hours = [
+        ("Monday", "07:00", "21:00", False),
+        ("Tuesday", "07:00", "21:00", False),
+        ("Wednesday", "07:00", "21:00", False),
+        ("Thursday", "07:00", "21:00", False),
+        ("Friday", "07:00", "17:00", False),
+        ("Saturday", None, None, True),
+        ("Sunday", None, None, True),
+    ]
+
+    for day, open_time, close_time, is_closed in miller_hours:
+        cursor.execute(
+            "INSERT INTO hours (resource_id, day_of_week, open_time, close_time, is_closed) VALUES (%s, %s, %s, %s, %s)",
+            (miller_id, day, open_time, close_time, is_closed)
+        )
+
+    # More Hall
+    cursor.execute(
+        "INSERT INTO resources (name, type, location, description) VALUES (%s, %s, %s, %s) RETURNING id",
+        ("More Hall", "academic", "Central Campus",
+         "Engineering building with classrooms and structural engineering labs")
+    )
+    more_id = cursor.fetchone()[0]
+
+    more_hours = [
+        ("Monday", "07:00", "21:00", False),
+        ("Tuesday", "07:00", "21:00", False),
+        ("Wednesday", "07:00", "21:00", False),
+        ("Thursday", "07:00", "21:00", False),
+        ("Friday", "07:00", "18:00", False),
+        ("Saturday", None, None, True),
+        ("Sunday", None, None, True),
+    ]
+
+    for day, open_time, close_time, is_closed in more_hours:
+        cursor.execute(
+            "INSERT INTO hours (resource_id, day_of_week, open_time, close_time, is_closed) VALUES (%s, %s, %s, %s, %s)",
+            (more_id, day, open_time, close_time, is_closed)
+        )
+
+    # Mueller Hall
+    cursor.execute(
+        "INSERT INTO resources (name, type, location, description) VALUES (%s, %s, %s, %s) RETURNING id",
+        ("Mueller Hall", "academic", "Central Campus",
+         "Engineering building adjacent to the engineering quad")
+    )
+    mueller_id = cursor.fetchone()[0]
+
+    mueller_hours = [
+        ("Monday", "07:00", "21:00", False),
+        ("Tuesday", "07:00", "21:00", False),
+        ("Wednesday", "07:00", "21:00", False),
+        ("Thursday", "07:00", "21:00", False),
+        ("Friday", "07:00", "18:00", False),
+        ("Saturday", None, None, True),
+        ("Sunday", None, None, True),
+    ]
+
+    for day, open_time, close_time, is_closed in mueller_hours:
+        cursor.execute(
+            "INSERT INTO hours (resource_id, day_of_week, open_time, close_time, is_closed) VALUES (%s, %s, %s, %s, %s)",
+            (mueller_id, day, open_time, close_time, is_closed)
+        )
+
+    # Padelford Hall
+    cursor.execute(
+        "INSERT INTO resources (name, type, location, description) VALUES (%s, %s, %s, %s) RETURNING id",
+        ("Padelford Hall", "academic", "Central Campus",
+         "Large classroom building housing the English department and language programs")
+    )
+    padelford_id = cursor.fetchone()[0]
+
+    padelford_hours = [
+        ("Monday", "07:00", "21:30", False),
+        ("Tuesday", "07:00", "21:30", False),
+        ("Wednesday", "07:00", "21:30", False),
+        ("Thursday", "07:00", "21:30", False),
+        ("Friday", "07:00", "18:00", False),
+        ("Saturday", None, None, True),
+        ("Sunday", None, None, True),
+    ]
+
+    for day, open_time, close_time, is_closed in padelford_hours:
+        cursor.execute(
+            "INSERT INTO hours (resource_id, day_of_week, open_time, close_time, is_closed) VALUES (%s, %s, %s, %s, %s)",
+            (padelford_id, day, open_time, close_time, is_closed)
+        )
+
+    # Parrington Hall
+    cursor.execute(
+        "INSERT INTO resources (name, type, location, description) VALUES (%s, %s, %s, %s) RETURNING id",
+        ("Parrington Hall", "academic", "Central Campus",
+         "Historic building on the Quad housing academic departments")
+    )
+    parrington_id = cursor.fetchone()[0]
+
+    parrington_hours = [
+        ("Monday", "07:00", "21:00", False),
+        ("Tuesday", "07:00", "21:00", False),
+        ("Wednesday", "07:00", "21:00", False),
+        ("Thursday", "07:00", "21:00", False),
+        ("Friday", "07:00", "17:00", False),
+        ("Saturday", None, None, True),
+        ("Sunday", None, None, True),
+    ]
+
+    for day, open_time, close_time, is_closed in parrington_hours:
+        cursor.execute(
+            "INSERT INTO hours (resource_id, day_of_week, open_time, close_time, is_closed) VALUES (%s, %s, %s, %s, %s)",
+            (parrington_id, day, open_time, close_time, is_closed)
+        )
+
+    # Physics Astronomy Building
+    cursor.execute(
+        "INSERT INTO resources (name, type, location, description) VALUES (%s, %s, %s, %s) RETURNING id",
+        ("Physics Astronomy Building", "academic", "Central Campus",
+         "Houses the Physics and Astronomy departments with lecture halls and research labs")
+    )
+    pab_id = cursor.fetchone()[0]
+
+    pab_hours = [
+        ("Monday", "07:00", "21:30", False),
+        ("Tuesday", "07:00", "21:30", False),
+        ("Wednesday", "07:00", "21:30", False),
+        ("Thursday", "07:00", "21:30", False),
+        ("Friday", "07:00", "21:30", False),
+        ("Saturday", None, None, True),
+        ("Sunday", None, None, True),
+    ]
+
+    for day, open_time, close_time, is_closed in pab_hours:
+        cursor.execute(
+            "INSERT INTO hours (resource_id, day_of_week, open_time, close_time, is_closed) VALUES (%s, %s, %s, %s, %s)",
+            (pab_id, day, open_time, close_time, is_closed)
+        )
+
+    # Raitt Hall
+    cursor.execute(
+        "INSERT INTO resources (name, type, location, description) VALUES (%s, %s, %s, %s) RETURNING id",
+        ("Raitt Hall", "academic", "Central Campus",
+         "Houses the Department of Anthropology and the Linguistics department")
+    )
+    raitt_id = cursor.fetchone()[0]
+
+    raitt_hours = [
+        ("Monday", "07:00", "21:00", False),
+        ("Tuesday", "07:00", "21:00", False),
+        ("Wednesday", "07:00", "21:00", False),
+        ("Thursday", "07:00", "21:00", False),
+        ("Friday", "07:00", "17:00", False),
+        ("Saturday", None, None, True),
+        ("Sunday", None, None, True),
+    ]
+
+    for day, open_time, close_time, is_closed in raitt_hours:
+        cursor.execute(
+            "INSERT INTO hours (resource_id, day_of_week, open_time, close_time, is_closed) VALUES (%s, %s, %s, %s, %s)",
+            (raitt_id, day, open_time, close_time, is_closed)
+        )
+
+    # Roberts Hall
+    cursor.execute(
+        "INSERT INTO resources (name, type, location, description) VALUES (%s, %s, %s, %s) RETURNING id",
+        ("Roberts Hall", "academic", "Central Campus",
+         "Engineering building with classrooms and lab spaces")
+    )
+    roberts_id = cursor.fetchone()[0]
+
+    roberts_hours = [
+        ("Monday", "07:00", "21:00", False),
+        ("Tuesday", "07:00", "21:00", False),
+        ("Wednesday", "07:00", "21:00", False),
+        ("Thursday", "07:00", "21:00", False),
+        ("Friday", "07:00", "18:00", False),
+        ("Saturday", None, None, True),
+        ("Sunday", None, None, True),
+    ]
+
+    for day, open_time, close_time, is_closed in roberts_hours:
+        cursor.execute(
+            "INSERT INTO hours (resource_id, day_of_week, open_time, close_time, is_closed) VALUES (%s, %s, %s, %s, %s)",
+            (roberts_id, day, open_time, close_time, is_closed)
+        )
+
+    # Schmitz Hall
+    cursor.execute(
+        "INSERT INTO resources (name, type, location, description) VALUES (%s, %s, %s, %s) RETURNING id",
+        ("Schmitz Hall", "academic", "Central Campus",
+         "Brutalist-style administration building housing student services and financial aid")
+    )
+    schmitz_id = cursor.fetchone()[0]
+
+    schmitz_hours = [
+        ("Monday", "07:30", "17:00", False),
+        ("Tuesday", "07:30", "17:00", False),
+        ("Wednesday", "07:30", "17:00", False),
+        ("Thursday", "07:30", "17:00", False),
+        ("Friday", "07:30", "17:00", False),
+        ("Saturday", None, None, True),
+        ("Sunday", None, None, True),
+    ]
+
+    for day, open_time, close_time, is_closed in schmitz_hours:
+        cursor.execute(
+            "INSERT INTO hours (resource_id, day_of_week, open_time, close_time, is_closed) VALUES (%s, %s, %s, %s, %s)",
+            (schmitz_id, day, open_time, close_time, is_closed)
+        )
+
+    # Sieg Hall
+    cursor.execute(
+        "INSERT INTO resources (name, type, location, description) VALUES (%s, %s, %s, %s) RETURNING id",
+        ("Sieg Hall", "academic", "Central Campus",
+         "Houses the Department of Mathematics and computer labs")
+    )
+    sieg_id = cursor.fetchone()[0]
+
+    sieg_hours = [
+        ("Monday", "07:00", "21:30", False),
+        ("Tuesday", "07:00", "21:30", False),
+        ("Wednesday", "07:00", "21:30", False),
+        ("Thursday", "07:00", "21:30", False),
+        ("Friday", "07:00", "18:00", False),
+        ("Saturday", None, None, True),
+        ("Sunday", None, None, True),
+    ]
+
+    for day, open_time, close_time, is_closed in sieg_hours:
+        cursor.execute(
+            "INSERT INTO hours (resource_id, day_of_week, open_time, close_time, is_closed) VALUES (%s, %s, %s, %s, %s)",
+            (sieg_id, day, open_time, close_time, is_closed)
+        )
+
+    # Smith Hall
+    cursor.execute(
+        "INSERT INTO resources (name, type, location, description) VALUES (%s, %s, %s, %s) RETURNING id",
+        ("Smith Hall", "academic", "Central Campus",
+         "Houses the Department of History and various humanities programs")
+    )
+    smith_id = cursor.fetchone()[0]
+
+    smith_hours = [
+        ("Monday", "07:00", "21:00", False),
+        ("Tuesday", "07:00", "21:00", False),
+        ("Wednesday", "07:00", "21:00", False),
+        ("Thursday", "07:00", "21:00", False),
+        ("Friday", "07:00", "17:00", False),
+        ("Saturday", None, None, True),
+        ("Sunday", None, None, True),
+    ]
+
+    for day, open_time, close_time, is_closed in smith_hours:
+        cursor.execute(
+            "INSERT INTO hours (resource_id, day_of_week, open_time, close_time, is_closed) VALUES (%s, %s, %s, %s, %s)",
+            (smith_id, day, open_time, close_time, is_closed)
+        )
+
+    # Thomson Hall
+    cursor.execute(
+        "INSERT INTO resources (name, type, location, description) VALUES (%s, %s, %s, %s) RETURNING id",
+        ("Thomson Hall", "academic", "Central Campus",
+         "Large lecture hall building with auditorium-style classrooms for introductory courses")
+    )
+    thomson_id = cursor.fetchone()[0]
+
+    thomson_hours = [
+        ("Monday", "07:00", "21:30", False),
+        ("Tuesday", "07:00", "21:30", False),
+        ("Wednesday", "07:00", "21:30", False),
+        ("Thursday", "07:00", "21:30", False),
+        ("Friday", "07:00", "18:00", False),
+        ("Saturday", None, None, True),
+        ("Sunday", None, None, True),
+    ]
+
+    for day, open_time, close_time, is_closed in thomson_hours:
+        cursor.execute(
+            "INSERT INTO hours (resource_id, day_of_week, open_time, close_time, is_closed) VALUES (%s, %s, %s, %s, %s)",
+            (thomson_id, day, open_time, close_time, is_closed)
+        )
+
+    # Wilcox Hall
+    cursor.execute(
+        "INSERT INTO resources (name, type, location, description) VALUES (%s, %s, %s, %s) RETURNING id",
+        ("Wilcox Hall", "academic", "Central Campus",
+         "Engineering building near the engineering quad")
+    )
+    wilcox_id = cursor.fetchone()[0]
+
+    wilcox_hours = [
+        ("Monday", "07:00", "21:00", False),
+        ("Tuesday", "07:00", "21:00", False),
+        ("Wednesday", "07:00", "21:00", False),
+        ("Thursday", "07:00", "21:00", False),
+        ("Friday", "07:00", "18:00", False),
+        ("Saturday", None, None, True),
+        ("Sunday", None, None, True),
+    ]
+
+    for day, open_time, close_time, is_closed in wilcox_hours:
+        cursor.execute(
+            "INSERT INTO hours (resource_id, day_of_week, open_time, close_time, is_closed) VALUES (%s, %s, %s, %s, %s)",
+            (wilcox_id, day, open_time, close_time, is_closed)
+        )
+
+    # William H. Gates Hall (Law)
+    cursor.execute(
+        "INSERT INTO resources (name, type, location, description) VALUES (%s, %s, %s, %s) RETURNING id",
+        ("William H. Gates Hall", "academic", "North Campus",
+         "Houses the UW School of Law with classrooms, moot courtroom, and the Gallagher Law Library")
+    )
+    gates_law_id = cursor.fetchone()[0]
+
+    gates_law_hours = [
+        ("Monday", "07:00", "22:00", False),
+        ("Tuesday", "07:00", "22:00", False),
+        ("Wednesday", "07:00", "22:00", False),
+        ("Thursday", "07:00", "22:00", False),
+        ("Friday", "07:00", "18:00", False),
+        ("Saturday", "09:00", "17:00", False),
+        ("Sunday", "12:00", "22:00", False),
+    ]
+
+    for day, open_time, close_time, is_closed in gates_law_hours:
+        cursor.execute(
+            "INSERT INTO hours (resource_id, day_of_week, open_time, close_time, is_closed) VALUES (%s, %s, %s, %s, %s)",
+            (gates_law_id, day, open_time, close_time, is_closed)
+        )
+
+    # Paccar Hall
+    cursor.execute(
+        "INSERT INTO resources (name, type, location, description) VALUES (%s, %s, %s, %s) RETURNING id",
+        ("Paccar Hall", "academic", "North Campus",
+         "Home to the Foster School of Business with classrooms, study rooms, and the business library")
+    )
+    paccar_id = cursor.fetchone()[0]
+
+    paccar_hours = [
+        ("Monday", "07:00", "22:00", False),
+        ("Tuesday", "07:00", "22:00", False),
+        ("Wednesday", "07:00", "22:00", False),
+        ("Thursday", "07:00", "22:00", False),
+        ("Friday", "07:00", "18:00", False),
+        ("Saturday", "09:00", "17:00", False),
+        ("Sunday", "12:00", "20:00", False),
+    ]
+
+    for day, open_time, close_time, is_closed in paccar_hours:
+        cursor.execute(
+            "INSERT INTO hours (resource_id, day_of_week, open_time, close_time, is_closed) VALUES (%s, %s, %s, %s, %s)",
+            (paccar_id, day, open_time, close_time, is_closed)
+        )
+
+    # Meany Hall
+    cursor.execute(
+        "INSERT INTO resources (name, type, location, description) VALUES (%s, %s, %s, %s) RETURNING id",
+        ("Meany Hall", "academic", "Central Campus",
+         "Performing arts venue with a main theater for concerts, lectures, and dance performances")
+    )
+    meany_id = cursor.fetchone()[0]
+
+    meany_hours = [
+        ("Monday", "07:00", "22:00", False),
+        ("Tuesday", "07:00", "22:00", False),
+        ("Wednesday", "07:00", "22:00", False),
+        ("Thursday", "07:00", "22:00", False),
+        ("Friday", "07:00", "22:00", False),
+        ("Saturday", "09:00", "22:00", False),
+        ("Sunday", "12:00", "22:00", False),
+    ]
+
+    for day, open_time, close_time, is_closed in meany_hours:
+        cursor.execute(
+            "INSERT INTO hours (resource_id, day_of_week, open_time, close_time, is_closed) VALUES (%s, %s, %s, %s, %s)",
+            (meany_id, day, open_time, close_time, is_closed)
+        )
+
+    # Bloedel Hall
+    cursor.execute(
+        "INSERT INTO resources (name, type, location, description) VALUES (%s, %s, %s, %s) RETURNING id",
+        ("Bloedel Hall", "academic", "Central Campus",
+         "Houses the School of Environmental and Forest Sciences")
+    )
+    bloedel_id = cursor.fetchone()[0]
+
+    bloedel_hours = [
+        ("Monday", "07:00", "21:00", False),
+        ("Tuesday", "07:00", "21:00", False),
+        ("Wednesday", "07:00", "21:00", False),
+        ("Thursday", "07:00", "21:00", False),
+        ("Friday", "07:00", "17:00", False),
+        ("Saturday", None, None, True),
+        ("Sunday", None, None, True),
+    ]
+
+    for day, open_time, close_time, is_closed in bloedel_hours:
+        cursor.execute(
+            "INSERT INTO hours (resource_id, day_of_week, open_time, close_time, is_closed) VALUES (%s, %s, %s, %s, %s)",
+            (bloedel_id, day, open_time, close_time, is_closed)
         )
 
     # --- Student Centers ---
