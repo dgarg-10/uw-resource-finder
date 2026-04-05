@@ -51,11 +51,11 @@ function ResourceModal({ resource, hours, onClose }) {
           </button>
           <h2 className="modal-title">{resource.name}</h2>
           <span className={`type-badge ${resource.type}`}>{resource.type}</span>
-      
+
           {resource.location && (
             <a
               className="modal-location"
-              href={directionsURL}
+              href={directionsUrl}
               target="_blank"
               rel="noopener noreferrer"
               onClick={(e) => e.stopPropagation()}
