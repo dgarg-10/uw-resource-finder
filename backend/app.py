@@ -13,7 +13,10 @@ from db import (
 )
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, resources={r"/api/*": {"origins": [
+    "http://localhost:5173",
+    "https://uw-resource-finder-virid.vercel.app"
+]}})
 
 @app.route("/api/resources", methods=["GET"])
 def list_resources():
