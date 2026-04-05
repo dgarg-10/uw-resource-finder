@@ -1,7 +1,6 @@
 function ResourceModal({ resource, hours, onClose }) {
     if (!resource) return null;
-    const directionsURL = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(resource.name + " University of Washington Seattle")}`;
-
+    const directionsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(resource.name + " University of Washington Seattle")}`;
     const websiteLinks = {
       "By George": "https://hfs.uw.edu/eat/locations-and-hours/by-george/",
       "Center Table": "https://hfs.uw.edu/eat/locations-and-hours/center-table/",
@@ -52,7 +51,7 @@ function ResourceModal({ resource, hours, onClose }) {
           </button>
           <h2 className="modal-title">{resource.name}</h2>
           <span className={`type-badge ${resource.type}`}>{resource.type}</span>
-
+      
           {resource.location && (
             <a
               className="modal-location"
@@ -61,7 +60,7 @@ function ResourceModal({ resource, hours, onClose }) {
               rel="noopener noreferrer"
               onClick={(e) => e.stopPropagation()}
             >
-            📍 {resource.location} — Get Directions
+            📍 {resource.location} — View on Maps
             </a>
           )}
 
