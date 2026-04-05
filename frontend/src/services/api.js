@@ -1,4 +1,6 @@
-const API_URL = "http://localhost:5001/api";
+const API_URL = import.meta.env.PROD
+    ? "https://uw-campus-finder-backend.onrender.com/api"
+    : "http://localhost:5001/api";
 
 
 export function getUserId(){
