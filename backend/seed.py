@@ -1482,6 +1482,487 @@ def seed():
             (ecc_id, day, open_time, close_time, is_closed)
         )
 
+    # --- Dining ---
+
+    # By George
+    cursor.execute(
+        "INSERT INTO resources (name, type, location, description) VALUES (%s, %s, %s, %s) RETURNING id",
+        ("By George", "dining", "South Campus",
+         "Coffee and grab-and-go items including pastries, sandwiches, and snacks")
+    )
+    bygeorge_id = cursor.fetchone()[0]
+
+    bygeorge_hours = [
+        ("Monday", "07:30", "20:00", False),
+        ("Tuesday", "07:30", "20:00", False),
+        ("Wednesday", "07:30", "20:00", False),
+        ("Thursday", "07:30", "20:00", False),
+        ("Friday", "07:30", "17:00", False),
+        ("Saturday", None, None, True),
+        ("Sunday", None, None, True),
+    ]
+
+    for day, open_time, close_time, is_closed in bygeorge_hours:
+        cursor.execute(
+            "INSERT INTO hours (resource_id, day_of_week, open_time, close_time, is_closed) VALUES (%s, %s, %s, %s, %s)",
+            (bygeorge_id, day, open_time, close_time, is_closed)
+        )
+
+    # Center Table
+    cursor.execute(
+        "INSERT INTO resources (name, type, location, description) VALUES (%s, %s, %s, %s) RETURNING id",
+        ("Center Table", "dining", "North Campus",
+         "North campus dining hall with all-you-can-eat meals and diverse food stations")
+    )
+    centertable_id = cursor.fetchone()[0]
+
+    centertable_hours = [
+        ("Monday", "07:30", "22:00", False),
+        ("Tuesday", "07:30", "22:00", False),
+        ("Wednesday", "07:30", "22:00", False),
+        ("Thursday", "07:30", "22:00", False),
+        ("Friday", "07:30", "22:00", False),
+        ("Saturday", "07:30", "22:00", False),
+        ("Sunday", "07:30", "22:00", False),
+    ]
+
+    for day, open_time, close_time, is_closed in centertable_hours:
+        cursor.execute(
+            "INSERT INTO hours (resource_id, day_of_week, open_time, close_time, is_closed) VALUES (%s, %s, %s, %s, %s)",
+            (centertable_id, day, open_time, close_time, is_closed)
+        )
+
+    # Cultivate
+    cursor.execute(
+        "INSERT INTO resources (name, type, location, description) VALUES (%s, %s, %s, %s) RETURNING id",
+        ("Cultivate", "dining", "West Campus",
+         "West campus gastro pub serving lunch and dinner with a rotating seasonal menu")
+    )
+    cultivate_id = cursor.fetchone()[0]
+
+    cultivate_hours = [
+        ("Monday", "11:00", "20:30", False),
+        ("Tuesday", "11:00", "20:30", False),
+        ("Wednesday", "11:00", "20:30", False),
+        ("Thursday", "11:00", "20:30", False),
+        ("Friday", "11:30", "15:00", False),
+        ("Saturday", None, None, True),
+        ("Sunday", None, None, True),
+    ]
+
+    for day, open_time, close_time, is_closed in cultivate_hours:
+        cursor.execute(
+            "INSERT INTO hours (resource_id, day_of_week, open_time, close_time, is_closed) VALUES (%s, %s, %s, %s, %s)",
+            (cultivate_id, day, open_time, close_time, is_closed)
+        )
+
+    # Husky Den Food Court
+    cursor.execute(
+        "INSERT INTO resources (name, type, location, description) VALUES (%s, %s, %s, %s) RETURNING id",
+        ("Husky Den Food Court", "dining", "Central Campus (HUB)",
+         "Food court in the HUB featuring multiple vendors including burgers, Asian cuisine, and more")
+    )
+    huskyden_id = cursor.fetchone()[0]
+
+    huskyden_hours = [
+        ("Monday", "10:15", "19:00", False),
+        ("Tuesday", "10:15", "19:00", False),
+        ("Wednesday", "10:15", "19:00", False),
+        ("Thursday", "10:15", "19:00", False),
+        ("Friday", "10:15", "16:00", False),
+        ("Saturday", None, None, True),
+        ("Sunday", None, None, True),
+    ]
+
+    for day, open_time, close_time, is_closed in huskyden_hours:
+        cursor.execute(
+            "INSERT INTO hours (resource_id, day_of_week, open_time, close_time, is_closed) VALUES (%s, %s, %s, %s, %s)",
+            (huskyden_id, day, open_time, close_time, is_closed)
+        )
+
+    # Local Point
+    cursor.execute(
+        "INSERT INTO resources (name, type, location, description) VALUES (%s, %s, %s, %s) RETURNING id",
+        ("Local Point", "dining", "West Campus (Lander Hall)",
+         "West campus dining hall with all-you-can-eat meals, late-night hours, and diverse food options")
+    )
+    localpoint_id = cursor.fetchone()[0]
+
+    localpoint_hours = [
+        ("Monday", "07:30", "23:00", False),
+        ("Tuesday", "07:30", "23:00", False),
+        ("Wednesday", "07:30", "23:00", False),
+        ("Thursday", "07:30", "23:00", False),
+        ("Friday", "07:30", "23:00", False),
+        ("Saturday", "08:00", "23:00", False),
+        ("Sunday", "08:00", "22:00", False),
+    ]
+
+    for day, open_time, close_time, is_closed in localpoint_hours:
+        cursor.execute(
+            "INSERT INTO hours (resource_id, day_of_week, open_time, close_time, is_closed) VALUES (%s, %s, %s, %s, %s)",
+            (localpoint_id, day, open_time, close_time, is_closed)
+        )
+
+    # Dawg Bites
+    cursor.execute(
+        "INSERT INTO resources (name, type, location, description) VALUES (%s, %s, %s, %s) RETURNING id",
+        ("Dawg Bites", "dining", "South Campus (IMA)",
+         "Café inside the IMA serving smoothies, protein shakes, and light bites to fuel your workout")
+    )
+    dawgbites_id = cursor.fetchone()[0]
+
+    dawgbites_hours = [
+        ("Monday", "11:30", "21:00", False),
+        ("Tuesday", "11:30", "21:00", False),
+        ("Wednesday", "11:30", "21:00", False),
+        ("Thursday", "11:30", "21:00", False),
+        ("Friday", "11:30", "21:00", False),
+        ("Saturday", None, None, True),
+        ("Sunday", "11:30", "19:00", False),
+    ]
+
+    for day, open_time, close_time, is_closed in dawgbites_hours:
+        cursor.execute(
+            "INSERT INTO hours (resource_id, day_of_week, open_time, close_time, is_closed) VALUES (%s, %s, %s, %s, %s)",
+            (dawgbites_id, day, open_time, close_time, is_closed)
+        )
+
+    # Husky Den Café
+    cursor.execute(
+        "INSERT INTO resources (name, type, location, description) VALUES (%s, %s, %s, %s) RETURNING id",
+        ("Husky Den Café", "dining", "Central Campus (HUB)",
+         "Espresso bar and café inside the HUB for coffee and quick bites")
+    )
+    huskydencafe_id = cursor.fetchone()[0]
+
+    huskydencafe_hours = [
+        ("Monday", "08:00", "17:00", False),
+        ("Tuesday", "08:00", "17:00", False),
+        ("Wednesday", "08:00", "17:00", False),
+        ("Thursday", "08:00", "17:00", False),
+        ("Friday", "08:00", "17:00", False),
+        ("Saturday", None, None, True),
+        ("Sunday", None, None, True),
+    ]
+
+    for day, open_time, close_time, is_closed in huskydencafe_hours:
+        cursor.execute(
+            "INSERT INTO hours (resource_id, day_of_week, open_time, close_time, is_closed) VALUES (%s, %s, %s, %s, %s)",
+            (huskydencafe_id, day, open_time, close_time, is_closed)
+        )
+
+    # Husky Grind Café, District Market Alder
+    cursor.execute(
+        "INSERT INTO resources (name, type, location, description) VALUES (%s, %s, %s, %s) RETURNING id",
+        ("Husky Grind Café, District Market Alder", "dining", "West Campus (Alder Hall)",
+         "UW coffeehouse inside Alder Hall's District Market serving espresso and baked goods")
+    )
+    grind_alder_id = cursor.fetchone()[0]
+
+    grind_alder_hours = [
+        ("Monday", "07:00", "20:00", False),
+        ("Tuesday", "07:00", "20:00", False),
+        ("Wednesday", "07:00", "20:00", False),
+        ("Thursday", "07:00", "20:00", False),
+        ("Friday", "07:00", "20:00", False),
+        ("Saturday", "08:00", "20:00", False),
+        ("Sunday", "08:00", "20:00", False),
+    ]
+
+    for day, open_time, close_time, is_closed in grind_alder_hours:
+        cursor.execute(
+            "INSERT INTO hours (resource_id, day_of_week, open_time, close_time, is_closed) VALUES (%s, %s, %s, %s, %s)",
+            (grind_alder_id, day, open_time, close_time, is_closed)
+        )
+
+    # Husky Grind Café, District Market Oak
+    cursor.execute(
+        "INSERT INTO resources (name, type, location, description) VALUES (%s, %s, %s, %s) RETURNING id",
+        ("Husky Grind Café, District Market Oak", "dining", "West Campus (Oak Hall)",
+         "UW coffeehouse near Denny Field inside Oak Hall's District Market")
+    )
+    grind_oak_id = cursor.fetchone()[0]
+
+    grind_oak_hours = [
+        ("Monday", "07:00", "20:00", False),
+        ("Tuesday", "07:00", "20:00", False),
+        ("Wednesday", "07:00", "20:00", False),
+        ("Thursday", "07:00", "20:00", False),
+        ("Friday", "07:00", "20:00", False),
+        ("Saturday", "08:00", "20:00", False),
+        ("Sunday", "08:00", "20:00", False),
+    ]
+
+    for day, open_time, close_time, is_closed in grind_oak_hours:
+        cursor.execute(
+            "INSERT INTO hours (resource_id, day_of_week, open_time, close_time, is_closed) VALUES (%s, %s, %s, %s, %s)",
+            (grind_oak_id, day, open_time, close_time, is_closed)
+        )
+
+    # Husky Grind Café, Mercer Court
+    cursor.execute(
+        "INSERT INTO resources (name, type, location, description) VALUES (%s, %s, %s, %s) RETURNING id",
+        ("Husky Grind Café, Mercer Court", "dining", "West Campus (Mercer Court)",
+         "UW coffeehouse in Mercer Court near the Burke-Gilman Trail")
+    )
+    grind_mercer_id = cursor.fetchone()[0]
+
+    grind_mercer_hours = [
+        ("Monday", "07:00", "20:00", False),
+        ("Tuesday", "07:00", "20:00", False),
+        ("Wednesday", "07:00", "20:00", False),
+        ("Thursday", "07:00", "20:00", False),
+        ("Friday", "07:00", "20:00", False),
+        ("Saturday", "09:00", "20:00", False),
+        ("Sunday", "09:00", "20:00", False),
+    ]
+
+    for day, open_time, close_time, is_closed in grind_mercer_hours:
+        cursor.execute(
+            "INSERT INTO hours (resource_id, day_of_week, open_time, close_time, is_closed) VALUES (%s, %s, %s, %s, %s)",
+            (grind_mercer_id, day, open_time, close_time, is_closed)
+        )
+
+    # Microsoft Café
+    cursor.execute(
+        "INSERT INTO resources (name, type, location, description) VALUES (%s, %s, %s, %s) RETURNING id",
+        ("Microsoft Café", "dining", "Central Campus (Gates Center)",
+         "Café inside the Bill & Melinda Gates Center for Computer Science & Engineering")
+    )
+    mscafe_id = cursor.fetchone()[0]
+
+    mscafe_hours = [
+        ("Monday", "07:30", "17:00", False),
+        ("Tuesday", "07:30", "17:00", False),
+        ("Wednesday", "07:30", "17:00", False),
+        ("Thursday", "07:30", "17:00", False),
+        ("Friday", "07:30", "17:00", False),
+        ("Saturday", None, None, True),
+        ("Sunday", None, None, True),
+    ]
+
+    for day, open_time, close_time, is_closed in mscafe_hours:
+        cursor.execute(
+            "INSERT INTO hours (resource_id, day_of_week, open_time, close_time, is_closed) VALUES (%s, %s, %s, %s, %s)",
+            (mscafe_id, day, open_time, close_time, is_closed)
+        )
+
+    # Orin's Place
+    cursor.execute(
+        "INSERT INTO resources (name, type, location, description) VALUES (%s, %s, %s, %s) RETURNING id",
+        ("Orin's Place", "dining", "North Campus (Paccar Hall)",
+         "Coffee and grab-and-go items in Paccar Hall at the Foster School of Business")
+    )
+    orins_id = cursor.fetchone()[0]
+
+    orins_hours = [
+        ("Monday", "07:30", "19:00", False),
+        ("Tuesday", "07:30", "19:00", False),
+        ("Wednesday", "07:30", "19:00", False),
+        ("Thursday", "07:30", "19:00", False),
+        ("Friday", "07:30", "15:00", False),
+        ("Saturday", None, None, True),
+        ("Sunday", None, None, True),
+    ]
+
+    for day, open_time, close_time, is_closed in orins_hours:
+        cursor.execute(
+            "INSERT INTO hours (resource_id, day_of_week, open_time, close_time, is_closed) VALUES (%s, %s, %s, %s, %s)",
+            (orins_id, day, open_time, close_time, is_closed)
+        )
+
+    # Public Grounds
+    cursor.execute(
+        "INSERT INTO resources (name, type, location, description) VALUES (%s, %s, %s, %s) RETURNING id",
+        ("Public Grounds", "dining", "Central Campus (Parrington Hall)",
+         "Coffee and grab-and-go items in Parrington Hall on the Quad")
+    )
+    publicgrounds_id = cursor.fetchone()[0]
+
+    publicgrounds_hours = [
+        ("Monday", "09:30", "17:30", False),
+        ("Tuesday", "09:30", "17:30", False),
+        ("Wednesday", "09:30", "17:30", False),
+        ("Thursday", "09:30", "17:30", False),
+        ("Friday", None, None, True),
+        ("Saturday", None, None, True),
+        ("Sunday", None, None, True),
+    ]
+
+    for day, open_time, close_time, is_closed in publicgrounds_hours:
+        cursor.execute(
+            "INSERT INTO hours (resource_id, day_of_week, open_time, close_time, is_closed) VALUES (%s, %s, %s, %s, %s)",
+            (publicgrounds_id, day, open_time, close_time, is_closed)
+        )
+
+    # The Rotunda
+    cursor.execute(
+        "INSERT INTO resources (name, type, location, description) VALUES (%s, %s, %s, %s) RETURNING id",
+        ("The Rotunda", "dining", "South Campus (Health Sciences)",
+         "Grab-and-go items in the Magnuson Health Sciences Center I-Court")
+    )
+    rotunda_id = cursor.fetchone()[0]
+
+    rotunda_hours = [
+        ("Monday", "07:30", "18:00", False),
+        ("Tuesday", "07:30", "18:00", False),
+        ("Wednesday", "07:30", "18:00", False),
+        ("Thursday", "07:30", "18:00", False),
+        ("Friday", "07:30", "18:00", False),
+        ("Saturday", None, None, True),
+        ("Sunday", None, None, True),
+    ]
+
+    for day, open_time, close_time, is_closed in rotunda_hours:
+        cursor.execute(
+            "INSERT INTO hours (resource_id, day_of_week, open_time, close_time, is_closed) VALUES (%s, %s, %s, %s, %s)",
+            (rotunda_id, day, open_time, close_time, is_closed)
+        )
+
+    # Starbucks, Population Health
+    cursor.execute(
+        "INSERT INTO resources (name, type, location, description) VALUES (%s, %s, %s, %s) RETURNING id",
+        ("Starbucks, Population Health", "dining", "South Campus (Hans Rosling Center)",
+         "Starbucks location at the Hans Rosling Center for Population Health")
+    )
+    sbux_ph_id = cursor.fetchone()[0]
+
+    sbux_ph_hours = [
+        ("Monday", "07:30", "17:00", False),
+        ("Tuesday", "07:30", "17:00", False),
+        ("Wednesday", "07:30", "17:00", False),
+        ("Thursday", "07:30", "17:00", False),
+        ("Friday", "07:30", "17:00", False),
+        ("Saturday", None, None, True),
+        ("Sunday", None, None, True),
+    ]
+
+    for day, open_time, close_time, is_closed in sbux_ph_hours:
+        cursor.execute(
+            "INSERT INTO hours (resource_id, day_of_week, open_time, close_time, is_closed) VALUES (%s, %s, %s, %s, %s)",
+            (sbux_ph_id, day, open_time, close_time, is_closed)
+        )
+
+    # Starbucks, Suzzallo
+    cursor.execute(
+        "INSERT INTO resources (name, type, location, description) VALUES (%s, %s, %s, %s) RETURNING id",
+        ("Starbucks, Suzzallo", "dining", "Central Campus (Suzzallo Library)",
+         "Iconic Starbucks café inside Suzzallo Library on the ground floor")
+    )
+    sbux_suzz_id = cursor.fetchone()[0]
+
+    sbux_suzz_hours = [
+        ("Monday", "08:00", "19:00", False),
+        ("Tuesday", "08:00", "19:00", False),
+        ("Wednesday", "08:00", "19:00", False),
+        ("Thursday", "08:00", "19:00", False),
+        ("Friday", "08:00", "17:00", False),
+        ("Saturday", None, None, True),
+        ("Sunday", "13:00", "19:00", False),
+    ]
+
+    for day, open_time, close_time, is_closed in sbux_suzz_hours:
+        cursor.execute(
+            "INSERT INTO hours (resource_id, day_of_week, open_time, close_time, is_closed) VALUES (%s, %s, %s, %s, %s)",
+            (sbux_suzz_id, day, open_time, close_time, is_closed)
+        )
+
+    # Tower Café
+    cursor.execute(
+        "INSERT INTO resources (name, type, location, description) VALUES (%s, %s, %s, %s) RETURNING id",
+        ("Tower Café", "dining", "West Campus (UW Tower)",
+         "Café in the UW Tower serving coffee, breakfast, and lunch items")
+    )
+    towercafe_id = cursor.fetchone()[0]
+
+    towercafe_hours = [
+        ("Monday", "07:30", "14:30", False),
+        ("Tuesday", "07:30", "14:30", False),
+        ("Wednesday", "07:30", "14:30", False),
+        ("Thursday", "07:30", "14:30", False),
+        ("Friday", "07:30", "14:30", False),
+        ("Saturday", None, None, True),
+        ("Sunday", None, None, True),
+    ]
+
+    for day, open_time, close_time, is_closed in towercafe_hours:
+        cursor.execute(
+            "INSERT INTO hours (resource_id, day_of_week, open_time, close_time, is_closed) VALUES (%s, %s, %s, %s, %s)",
+            (towercafe_id, day, open_time, close_time, is_closed)
+        )
+
+    # District Market, Alder
+    cursor.execute(
+        "INSERT INTO resources (name, type, location, description) VALUES (%s, %s, %s, %s) RETURNING id",
+        ("District Market, Alder", "dining", "West Campus (Alder Hall)",
+         "Neighborhood grocery store in Alder Hall with fresh produce, hot and cold dishes, and snacks")
+    )
+    dm_alder_id = cursor.fetchone()[0]
+
+    dm_alder_hours = [
+        ("Monday", "07:00", "22:00", False),
+        ("Tuesday", "07:00", "22:00", False),
+        ("Wednesday", "07:00", "22:00", False),
+        ("Thursday", "07:00", "22:00", False),
+        ("Friday", "07:00", "22:00", False),
+        ("Saturday", "08:00", "22:00", False),
+        ("Sunday", "08:00", "22:00", False),
+    ]
+
+    for day, open_time, close_time, is_closed in dm_alder_hours:
+        cursor.execute(
+            "INSERT INTO hours (resource_id, day_of_week, open_time, close_time, is_closed) VALUES (%s, %s, %s, %s, %s)",
+            (dm_alder_id, day, open_time, close_time, is_closed)
+        )
+
+    # District Market, Oak
+    cursor.execute(
+        "INSERT INTO resources (name, type, location, description) VALUES (%s, %s, %s, %s) RETURNING id",
+        ("District Market, Oak", "dining", "West Campus (Oak Hall)",
+         "Neighborhood grocery store in Oak Hall with fresh produce, frozen food, and household items")
+    )
+    dm_oak_id = cursor.fetchone()[0]
+
+    dm_oak_hours = [
+        ("Monday", "07:00", "22:00", False),
+        ("Tuesday", "07:00", "22:00", False),
+        ("Wednesday", "07:00", "22:00", False),
+        ("Thursday", "07:00", "22:00", False),
+        ("Friday", "07:00", "22:00", False),
+        ("Saturday", "08:00", "22:00", False),
+        ("Sunday", "08:00", "22:00", False),
+    ]
+
+    for day, open_time, close_time, is_closed in dm_oak_hours:
+        cursor.execute(
+            "INSERT INTO hours (resource_id, day_of_week, open_time, close_time, is_closed) VALUES (%s, %s, %s, %s, %s)",
+            (dm_oak_id, day, open_time, close_time, is_closed)
+        )
+
+    # Etc., The HUB
+    cursor.execute(
+        "INSERT INTO resources (name, type, location, description) VALUES (%s, %s, %s, %s) RETURNING id",
+        ("Etc., The HUB", "dining", "Central Campus (HUB)",
+         "Express market inside the HUB with grab-and-go snacks, drinks, and essentials")
+    )
+    etc_id = cursor.fetchone()[0]
+
+    etc_hours = [
+        ("Monday", "07:30", "19:00", False),
+        ("Tuesday", "07:30", "19:00", False),
+        ("Wednesday", "07:30", "19:00", False),
+        ("Thursday", "07:30", "19:00", False),
+        ("Friday", "07:30", "16:00", False),
+        ("Saturday", None, None, True),
+        ("Sunday", None, None, True),
+    ]
+
+    for day, open_time, close_time, is_closed in etc_hours:
+        cursor.execute(
+            "INSERT INTO hours (resource_id, day_of_week, open_time, close_time, is_closed) VALUES (%s, %s, %s, %s, %s)",
+            (etc_id, day, open_time, close_time, is_closed)
+        )
     conn.commit()
     conn.close()
     print("Database seeded successfully!")

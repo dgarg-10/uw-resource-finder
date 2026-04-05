@@ -51,6 +51,7 @@ function ResourceCard({
       library: "Library",
       academic: "Academic",
       student_center: "Student Center",
+      dining: "Dining"
     };
   
     return (
