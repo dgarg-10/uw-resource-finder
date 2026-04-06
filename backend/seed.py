@@ -1494,7 +1494,7 @@ def seed():
 
     bygeorge_hours = [
         ("Monday", "07:30", "20:00", False),
-        ("Tuesday", "07:30", "20:00", False),
+        ("Tuesday", "07:30", "20:00", False),   
         ("Wednesday", "07:30", "20:00", False),
         ("Thursday", "07:30", "20:00", False),
         ("Friday", "07:30", "17:00", False),
