@@ -114,7 +114,7 @@ function App(){
   if (loading) {
     return (
       <div className="app">
-        <div className="loading">Loading campus resources...</div>
+        <div className="loading">Loading campus resources, this may take a moment</div>
       </div>
     );
   }
