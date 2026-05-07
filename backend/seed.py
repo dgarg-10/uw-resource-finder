@@ -930,6 +930,106 @@ def seed():
             "INSERT INTO hours (resource_id, day_of_week, open_time, close_time, is_closed) VALUES (%s, %s, %s, %s, %s)",
             (etc_id, day, open_time, close_time, is_closed)
         )
+
+    # --- Student Centers ---
+
+    # Husky Union Building (HUB)
+    cursor.execute(
+        "INSERT INTO resources (name, type, location, description) VALUES (%s, %s, %s, %s) RETURNING id",
+        ("Husky Union Building (HUB)", "student_center", "Central Campus",
+         "Student union with dining, event spaces, bowling alley, and student organization offices")
+    )
+    hub_id = cursor.fetchone()[0]
+
+    hub_hours = [
+        ("Monday", "07:00", "23:00", False),
+        ("Tuesday", "07:00", "23:00", False),
+        ("Wednesday", "07:00", "23:00", False),
+        ("Thursday", "07:00", "23:00", False),
+        ("Friday", "07:00", "23:00", False),
+        ("Saturday", "10:00", "23:00", False),
+        ("Sunday", "10:00", "23:00", False),
+    ]
+
+    for day, open_time, close_time, is_closed in hub_hours:
+        cursor.execute(
+            "INSERT INTO hours (resource_id, day_of_week, open_time, close_time, is_closed) VALUES (%s, %s, %s, %s, %s)",
+            (hub_id, day, open_time, close_time, is_closed)
+        )
+
+    # IMA (Intramural Activities Building)
+    cursor.execute(
+        "INSERT INTO resources (name, type, location, description) VALUES (%s, %s, %s, %s) RETURNING id",
+        ("IMA (Intramural Activities)", "student_center", "South Campus",
+         "Recreation and fitness center with gym, pool, climbing wall, and courts")
+    )
+    ima_id = cursor.fetchone()[0]
+
+    ima_hours = [
+        ("Monday", "06:00", "22:00", False),
+        ("Tuesday", "06:00", "22:00", False),
+        ("Wednesday", "06:00", "22:00", False),
+        ("Thursday", "06:00", "22:00", False),
+        ("Friday", "06:00", "21:00", False),
+        ("Saturday", "09:00", "21:00", False),
+        ("Sunday", "09:00", "21:00", False),
+    ]
+
+    for day, open_time, close_time, is_closed in ima_hours:
+        cursor.execute(
+            "INSERT INTO hours (resource_id, day_of_week, open_time, close_time, is_closed) VALUES (%s, %s, %s, %s, %s)",
+            (ima_id, day, open_time, close_time, is_closed)
+        )
+
+    # Samuel E. Kelly Ethnic Cultural Center
+    cursor.execute(
+        "INSERT INTO resources (name, type, location, description) VALUES (%s, %s, %s, %s) RETURNING id",
+        ("Samuel E. Kelly Ethnic Cultural Center", "student_center", "North Campus",
+         "Cultural center with event space, lounges, and multicultural student organization offices")
+    )
+    ecc_id = cursor.fetchone()[0]
+
+    ecc_hours = [
+        ("Monday", "08:00", "21:00", False),
+        ("Tuesday", "08:00", "21:00", False),
+        ("Wednesday", "08:00", "21:00", False),
+        ("Thursday", "08:00", "21:00", False),
+        ("Friday", "08:00", "17:00", False),
+        ("Saturday", None, None, True),
+        ("Sunday", None, None, True),
+    ]
+
+    for day, open_time, close_time, is_closed in ecc_hours:
+        cursor.execute(
+            "INSERT INTO hours (resource_id, day_of_week, open_time, close_time, is_closed) VALUES (%s, %s, %s, %s, %s)",
+            (ecc_id, day, open_time, close_time, is_closed)
+        )
+
+    # Area 01
+    cursor.execute(
+        "INSERT INTO resources (name, type, location, description) VALUES (%s, %s, %s, %s) RETURNING id",
+        ("Area 01", "student_center", "West Campus (Maple Hall)",
+         "Makerspace and community center featuring a Dabble Lab with 3D printers and laser cutters, Sound Lab, Image Lab for content creation, and Game Lab with consoles, arcade games, pool, and ping pong. Free for HFS residents, quarterly membership available for other students")
+    )
+    area01_id = cursor.fetchone()[0]
+
+    area01_hours = [
+        ("Monday", "13:00", "23:00", False),
+        ("Tuesday", "13:00", "23:00", False),
+        ("Wednesday", "13:00", "23:00", False),
+        ("Thursday", "13:00", "23:00", False),
+        ("Friday", "13:00", "23:00", False),
+        ("Saturday", "13:00", "23:00", False),
+        ("Sunday", "13:00", "23:00", False),
+    ]
+
+    for day, open_time, close_time, is_closed in area01_hours:
+        cursor.execute(
+            "INSERT INTO hours (resource_id, day_of_week, open_time, close_time, is_closed) VALUES (%s, %s, %s, %s, %s)",
+            (area01_id, day, open_time, close_time, is_closed)
+        )
+
+
     conn.commit()
     conn.close()
     print("Database seeded successfully!")
