@@ -146,7 +146,7 @@ function App(){
 
       <FilterTabs
           activeTab={activeTab}
-          onTabChange={setActiveTab}
+          onTabChange={(tab) => setActiveTab(activeTab === tab ? "all" : tab)}
           openNowFilter={openNowFilter}
           onToggleOpenNow={() => setOpenNowFilter(!openNowFilter)}
           huskyAccessFilter={huskyAccessFilter}
