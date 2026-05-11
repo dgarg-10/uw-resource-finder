@@ -19,7 +19,7 @@ def get_all_resources() -> list:
     """
     conn = get_connection()
     cursor = conn.cursor()
-    cursor.execute("SELECT id, name, type, location, description FROM resources ORDER BY name")
+    cursor.execute("SELECT id, name, type, location, description, husky_access FROM resources ORDER BY name")
     rows = cursor.fetchall()
     conn.close()
 
@@ -29,7 +29,8 @@ def get_all_resources() -> list:
             "name": row[1],
             "type": row[2],
             "location": row[3], 
-            "description": row[4]
+            "description": row[4],
+            "husky_access": row[5]
         }
         for row in rows
     ]
@@ -40,7 +41,7 @@ def get_resource_by_id(id) -> dict | None:
     """
     conn = get_connection()
     cursor = conn.cursor()
-    cursor.execute("SELECT id, name, type, location, description FROM resources WHERE id = %s", (id,))
+    cursor.execute("SELECT id, name, type, location, description, husky_access FROM resources WHERE id = %s", (id,))
     row = cursor.fetchone()
     conn.close()
 
@@ -52,7 +53,8 @@ def get_resource_by_id(id) -> dict | None:
         "name": row[1],
         "type": row[2],
         "location": row[3], 
-        "description": row[4]
+        "description": row[4],
+        "husky_access": row[5]
     }
     
 
@@ -111,7 +113,7 @@ def get_open_now():
     conn = get_connection()
     cursor = conn.cursor()
     cursor.execute(
-        """SELECT r.id, r.name, r.type, r.location, r.description,
+        """SELECT r.id, r.name, r.type, r.location, r.description, r.husky_access
                   h.open_time, h.close_time
            FROM resources r
            JOIN hours h ON r.id = h.resource_id
@@ -132,8 +134,9 @@ def get_open_now():
             "type": row[2],
             "location": row[3],
             "description": row[4],
-            "open_time": str(row[5])[:5] if row[5] else None,
-            "close_time": str(row[6])[:5] if row[6] else None
+            "husky_access": row[5],
+            "open_time": str(row[6])[:5] if row[6] else None,
+            "close_time": str(row[7])[:5] if row[7] else None
         }
         for row in rows
     ]
@@ -147,7 +150,7 @@ def search_resources(query):
     conn = get_connection()
     cursor = conn.cursor()
     cursor.execute(
-        """SELECT id, name, type, location, description
+        """SELECT id, name, type, location, description, husky_access
            FROM resources
            WHERE name ILIKE %s
            ORDER BY name""",
@@ -162,7 +165,8 @@ def search_resources(query):
             "name": row[1],
             "type": row[2],
             "location": row[3],
-            "description": row[4]
+            "description": row[4],
+            "husky_access": row[5]
         }
         for row in rows
     ]
@@ -175,7 +179,7 @@ def get_favorites(user_id):
     conn = get_connection()
     cursor = conn.cursor()
     cursor.execute(
-        """SELECT r.id, r.name, r.type, r.location, r.description
+        """SELECT r.id, r.name, r.type, r.location, r.description, r.husky_access
            FROM resources r
            JOIN favorites f ON r.id = f.resource_id
            WHERE f.user_id = %s
@@ -191,7 +195,8 @@ def get_favorites(user_id):
             "name": row[1],
             "type": row[2],
             "location": row[3],
-            "description": row[4]
+            "description": row[4],
+            "husky_access": row[5]
         }
         for row in rows
     ]

@@ -24,6 +24,8 @@ function App(){
   const [selectedHours, setSelectedHours] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [openNowFilter, setOpenNowFilter] = useState(false);
+  const [huskyAccessFilter, setHuskyAccessFilter] = useState(false);
 
   const userId = getUserId();
   useEffect(() => {
@@ -81,31 +83,37 @@ function App(){
     let filtered = resources;
 
     if (activeTab === "favorites") {
-      filtered = filtered.filter((r) => favoriteIds.includes(r.id));
-    } else if (activeTab === "open_now") {
-      filtered = filtered.filter((r) => {
-        const hours = todayHours[r.id];
-        if (!hours || hours.is_closed) return false;
-
-        const now = new Date();
-        const [openH, openM] = hours.open_time.split(":").map(Number);
-        const [closeH, closeM] = hours.close_time.split(":").map(Number);
-
-        const openDate = new Date();
-        openDate.setHours(openH, openM, 0);
-        const closeDate = new Date();
-        closeDate.setHours(closeH, closeM, 0);
-
-        return now >= openDate && now < closeDate;
-      });
+        filtered = filtered.filter((r) => favoriteIds.includes(r.id));
     } else if (activeTab !== "all") {
-      filtered = filtered.filter((r) => r.type === activeTab);
+        filtered = filtered.filter((r) => r.type === activeTab);
+    }
+
+    if (openNowFilter) {
+        filtered = filtered.filter((r) => {
+            const hours = todayHours[r.id];
+            if (!hours || hours.is_closed) return false;
+
+            const now = new Date();
+            const [openH, openM] = hours.open_time.split(":").map(Number);
+            const [closeH, closeM] = hours.close_time.split(":").map(Number);
+
+            const openDate = new Date();
+            openDate.setHours(openH, openM, 0);
+            const closeDate = new Date();
+            closeDate.setHours(closeH, closeM, 0);
+
+            return now >= openDate && now < closeDate;
+        });
+    }
+
+    if (huskyAccessFilter) {
+        filtered = filtered.filter((r) => r.husky_access === true);
     }
 
     if (searchQuery) {
-      filtered = filtered.filter((r) =>
-        r.name.toLowerCase().includes(searchQuery.toLowerCase())
-      );
+        filtered = filtered.filter((r) =>
+            r.name.toLowerCase().includes(searchQuery.toLowerCase())
+        );
     }
 
     return filtered;
@@ -136,7 +144,14 @@ function App(){
         <p className="app-subtitle">Find buildings, libraries, and hours</p>
       </header>
 
-      <FilterTabs activeTab={activeTab} onTabChange={setActiveTab} />
+      <FilterTabs
+          activeTab={activeTab}
+          onTabChange={setActiveTab}
+          openNowFilter={openNowFilter}
+          onToggleOpenNow={() => setOpenNowFilter(!openNowFilter)}
+          huskyAccessFilter={huskyAccessFilter}
+          onToggleHuskyAccess={() => setHuskyAccessFilter(!huskyAccessFilter)}
+      />
       <SearchBar value={searchQuery} onChange={setSearchQuery} />
 
       <div className="resource-grid">

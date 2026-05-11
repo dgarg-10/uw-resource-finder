@@ -401,11 +401,10 @@ def seed():
 
     # --- Academic Buildings ---
 
-    # ADD CSE2 BUILDING, AND HSEB
     cursor.execute(
-        "INSERT INTO resources (name, type, location, description) VALUES (%s, %s, %s, %s) RETURNING id",
+        "INSERT INTO resources (name, type, location, description, husky_access) VALUES (%s, %s, %s, %s, %s) RETURNING id",
         ("Bill & Melinda Gates Center (CSE2)", "academic", "South Campus",
-         "24/7 after hours cardkey entry, allowing access to student spaces, study rooms, and lab spaces.")
+         "24/7 after hours cardkey entry, allowing access to student spaces, study rooms, and lab spaces.", True)
     )
     cse2_id = cursor.fetchone()[0]
 
@@ -426,9 +425,9 @@ def seed():
         )
 
     cursor.execute(
-        "INSERT INTO resources (name, type, location, description) VALUES (%s, %s, %s, %s) RETURNING id",
+        "INSERT INTO resources (name, type, location, description, husky_access) VALUES (%s, %s, %s, %s, %s) RETURNING id",
         ("Health Science Education Building", "academic", "South West Campus",
-         "24/7 after hours cardkey entry, allowing access to student spaces, study rooms, and lab spaces.")
+         "24/7 after hours cardkey entry, allowing access to student spaces, study rooms, and lab spaces.", True)
     )
     hseb_id = cursor.fetchone()[0]
 

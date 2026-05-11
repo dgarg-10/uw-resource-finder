@@ -1,15 +1,12 @@
-import { act } from "react";
-
-const FilterTabs = ({activeTab, onTabChange}) => {
+function FilterTabs({ activeTab, onTabChange, openNowFilter, onToggleOpenNow, huskyAccessFilter, onToggleHuskyAccess }) {
     const tabs = [
         { id: "all", label: "All" },
-        { id: "favorites", label: "★ Favorites" },
-        { id: "academic", label: "Buildings" },
-        { id: "dining", label: "Dining"},
         { id: "library", label: "Libraries" },
-        { id: "open_now", label: "Open Now" },
+        { id: "academic", label: "Buildings" },
         { id: "student_center", label: "Student Centers" },
-      ];
+        { id: "dining", label: "Dining" },
+        { id: "favorites", label: "★ Favorites" },
+    ];
 
     return (
         <div className="filter-tabs">
@@ -22,8 +19,20 @@ const FilterTabs = ({activeTab, onTabChange}) => {
                     {tab.label}
                 </button>
             ))}
+            <button
+                className={`tab-btn open-now-btn ${openNowFilter ? "active" : ""}`}
+                onClick={onToggleOpenNow}
+            >
+                Open Now
+            </button>
+            <button
+                className={`tab-btn husky-btn ${huskyAccessFilter ? "active" : ""}`}
+                onClick={onToggleHuskyAccess}
+            >
+                🪪 Husky Access
+            </button>
         </div>
-    )
+    );
 }
 
-export default FilterTabs
+export default FilterTabs;

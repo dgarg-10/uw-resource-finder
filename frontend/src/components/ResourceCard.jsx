@@ -7,11 +7,14 @@ function ResourceCard({
   }) {
     function getStatusInfo() {
       if (!todayHours) {
-        return { status: "unknown", label: "Hours unavailable", countdown: null };
+          return { status: "unknown", label: "Hours unavailable", countdown: null };
       }
   
       if (todayHours.is_closed) {
-        return { status: "closed", label: "Closed Today", countdown: null };
+          if (resource.husky_access) {
+              return { status: "husky", label: "Husky Access Only", countdown: null };
+          }
+          return { status: "closed", label: "Closed Today", countdown: null };
       }
   
       const now = new Date();
@@ -20,30 +23,37 @@ function ResourceCard({
   
       const openDate = new Date();
       openDate.setHours(openH, openM, 0);
-  
       const closeDate = new Date();
       closeDate.setHours(closeH, closeM, 0);
   
       if (now < openDate) {
-        const diffMs = openDate - now;
-        const diffH = Math.floor(diffMs / (1000 * 60 * 60));
-        const diffM = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60));
-        const countdown =
-          diffH > 0 ? `Opens in ${diffH}h ${diffM}m` : `Opens in ${diffM}m`;
-        return { status: "closed", label: "Closed", countdown };
+          if (resource.husky_access) {
+              const diffMs = openDate - now;
+              const diffH = Math.floor(diffMs / (1000 * 60 * 60));
+              const diffM = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60));
+              const countdown = diffH > 0 ? `Opens to public in ${diffH}h ${diffM}m` : `Opens to public in ${diffM}m`;
+              return { status: "husky", label: "Husky Access Only", countdown };
+          }
+          const diffMs = openDate - now;
+          const diffH = Math.floor(diffMs / (1000 * 60 * 60));
+          const diffM = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60));
+          const countdown = diffH > 0 ? `Opens in ${diffH}h ${diffM}m` : `Opens in ${diffM}m`;
+          return { status: "closed", label: "Closed", countdown };
       }
   
       if (now >= closeDate) {
-        return { status: "closed", label: "Closed", countdown: null };
+          if (resource.husky_access) {
+              return { status: "husky", label: "Husky Access Only", countdown: null };
+          }
+          return { status: "closed", label: "Closed", countdown: null };
       }
   
       const diffMs = closeDate - now;
       const diffH = Math.floor(diffMs / (1000 * 60 * 60));
       const diffM = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60));
-      const countdown =
-        diffH > 0 ? `Closes in ${diffH}h ${diffM}m` : `Closes in ${diffM}m`;
+      const countdown = diffH > 0 ? `Closes in ${diffH}h ${diffM}m` : `Closes in ${diffM}m`;
       return { status: "open", label: "Open", countdown };
-    }
+  }
   
     const { status, label, countdown } = getStatusInfo();
   
