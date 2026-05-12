@@ -965,13 +965,13 @@ def seed():
     ima_id = cursor.fetchone()[0]
 
     ima_hours = [
-        ("Monday", "06:00", "22:00", False),
-        ("Tuesday", "06:00", "22:00", False),
-        ("Wednesday", "06:00", "22:00", False),
-        ("Thursday", "06:00", "22:00", False),
-        ("Friday", "06:00", "21:00", False),
-        ("Saturday", "09:00", "21:00", False),
-        ("Sunday", "09:00", "21:00", False),
+        ("Monday", "06:00", "22:30", False),
+        ("Tuesday", "06:00", "22:30", False),
+        ("Wednesday", "06:00", "22:30", False),
+        ("Thursday", "06:00", "22:30", False),
+        ("Friday", "06:00", "22:30", False),
+        ("Saturday", "09:00", "20:30", False),
+        ("Sunday", "09:00", "20:30", False),
     ]
 
     for day, open_time, close_time, is_closed in ima_hours:
