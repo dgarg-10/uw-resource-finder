@@ -18,13 +18,13 @@ def seed():
     odegaard_id = cursor.fetchone()[0]
 
     odegaard_hours = [
-        ("Monday", "08:00", "00:00", False),
-        ("Tuesday", "08:00", "00:00", False),
-        ("Wednesday", "08:00", "00:00", False),
-        ("Thursday", "08:00", "00:00", False),
+        ("Monday", "08:00", "23:59", False),
+        ("Tuesday", "08:00", "23:59", False),
+        ("Wednesday", "08:00", "23:59", False),
+        ("Thursday", "08:00", "23:59", False),
         ("Friday", "08:00", "20:00", False),
         ("Saturday", "12:00", "20:00", False),
-        ("Sunday", "12:00", "00:00", False),
+        ("Sunday", "12:00", "23:59", False),
     ]
 
     for day, open_time, close_time, is_closed in odegaard_hours:
