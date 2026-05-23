@@ -47,7 +47,7 @@ def seed():
         ("Wednesday", "08:00", "20:00", False),
         ("Thursday", "08:00", "20:00", False),
         ("Friday", "08:00", "18:00", False),
-        ("Saturday", None, None, False),
+        ("Saturday", None, None, True),
         ("Sunday", "13:00", "20:00", False),
     ]
 
