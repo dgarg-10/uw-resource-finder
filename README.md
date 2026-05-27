@@ -1,6 +1,6 @@
 # UW Campus Resource Finder
 
-A full-stack web app that helps University of Washington students find on-campus resources — dining halls, study spaces, gyms, and more — with real-time open/closed status, Husky Card access indicators, favoriting, and Google Maps integration.
+A full-stack web app that helps University of Washington students find on-campus resources, with real-time open/closed status, Husky Card access indicators, favoriting, and Google Maps integration.
 
 🔗 <https://uw-resources.vercel.app/>
 
