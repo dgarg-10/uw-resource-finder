@@ -50,7 +50,7 @@ function ResourceModal({ resource, hours, onClose, formatTime}) {
             ✕
           </button>
           <h2 className="modal-title">{resource.name}</h2>
-          <span className={`type-badge ${resource.type}`}>{resource.type}</span>
+          <span className={`type-badge ${resource.type}`}>{resource.type.includes("_") ? resource.type.replace("_", " ") : resource.type}</span>
 
           {resource.location && (
             <a
