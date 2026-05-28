@@ -26,6 +26,25 @@ function App(){
   const [error, setError] = useState(null);
   const [openNowFilter, setOpenNowFilter] = useState(false);
   const [huskyAccessFilter, setHuskyAccessFilter] = useState(false);
+  const [use24Hour, setUse24Hour] = useState(() => {
+    return localStorage.getItem("time_format") === "24";
+  })
+
+  function toggle24Hour() {
+    const newValue = !use24Hour;
+    setUse24Hour(newValue);
+    localStorage.setItem("time_format", newValue ? "24" : "12")
+  }
+
+  function formatTime(timeStr) {
+    if (!timeStr) return "";
+    if (use24Hour) return timeStr;
+
+    const [hours, minutes] = timeStr.split(":").map(Number);
+    const period = hours >= 12 ? "PM" : "AM";
+    const displayHours = hours % 12 || 12;
+    return `${displayHours}:${minutes.toString().padStart(2, "0")} ${period}`;
+}
 
   const userId = getUserId();
   useEffect(() => {
@@ -140,8 +159,18 @@ function App(){
   return (
     <div className="app">
       <header className="app-header">
-        <h1>UW Campus Resources</h1>
-        <p className="app-subtitle">Find buildings, libraries, and hours</p>
+        <div className="header-row">
+          <div>
+            <h1>UW Campus Resources</h1>
+            <p className="app-subtitle">Find buildings, libraries, and hours</p>
+          </div>
+          <button
+            className="time-toggle"
+            onClick={toggle24Hour}
+          >
+            {use24Hour ? "24h" : "12h"}
+          </button>
+        </div>
       </header>
 
       <FilterTabs
@@ -164,6 +193,7 @@ function App(){
               isFavorite={favoriteIds.includes(resource.id)}
               onToggleFavorite={handleToggleFavorite}
               onClick={() => handleCardClick(resource)}
+              formatTime={formatTime}
             />
           ))
         ) : (
@@ -178,6 +208,7 @@ function App(){
           resource={selectedResource}
           hours={selectedHours}
           onClose={() => setSelectedResource(null)}
+          formatTime={formatTime}
         />
       )}
     </div>

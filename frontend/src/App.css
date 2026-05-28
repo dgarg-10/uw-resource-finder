@@ -459,3 +459,27 @@ body {
 .empty-state p {
   font-size: 0.9rem;
 }
+
+.header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.time-toggle {
+  padding: 6px 12px;
+  border: 0.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.time-toggle:hover {
+  color: var(--text-primary);
+  background: var(--border);
+}

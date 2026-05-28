@@ -1,4 +1,4 @@
-function ResourceModal({ resource, hours, onClose }) {
+function ResourceModal({ resource, hours, onClose, formatTime}) {
     if (!resource) return null;
     const directionsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(resource.name + " University of Washington Seattle")}`;
     const websiteLinks = {
@@ -22,7 +22,7 @@ function ResourceModal({ resource, hours, onClose }) {
       "District Market, Alder": "https://hfs.uw.edu/eat/locations-and-hours/district-market-alder/",
       "District Market, Oak": "https://hfs.uw.edu/eat/locations-and-hours/district-market-oak/",
       "Etc., The HUB": "https://hfs.uw.edu/eat/locations-and-hours/etc-the-hub/",
-  };
+    };
   
   const websiteUrl = websiteLinks[resource.name] || null;
 
@@ -96,7 +96,7 @@ function ResourceModal({ resource, hours, onClose }) {
                   <td>
                     {h.is_closed
                       ? "Closed"
-                      : `${h.open_time} – ${h.close_time}`}
+                      : `${formatTime(h.open_time)} – ${formatTime(h.close_time)}`}
                   </td>
                 </tr>
               ))}

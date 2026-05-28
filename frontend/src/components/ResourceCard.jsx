@@ -4,6 +4,7 @@ function ResourceCard({
     isFavorite,
     onToggleFavorite,
     onClick,
+    formatTime
   }) {
     function getStatusInfo() {
       if (!todayHours) {
@@ -85,7 +86,7 @@ function ResourceCard({
           <span className={`status ${status}`}>{label}</span>
           {todayHours && !todayHours.is_closed && (
             <span className="hours-text">
-              {todayHours.open_time} – {todayHours.close_time}
+              {formatTime(todayHours.open_time)} – {formatTime(todayHours.close_time)}
             </span>
           )}
         </div>
