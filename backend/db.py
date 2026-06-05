@@ -2,6 +2,7 @@ import os
 import psycopg2
 from datetime import datetime
 from dotenv import load_dotenv
+from zoneinfo import ZoneInfo
 
 load_dotenv() #loads variable from the .env file
 
@@ -84,7 +85,7 @@ def get_hours_for_day():
     """
         Returns all resources' hours for the current day
     """
-    today = datetime.now().strftime("%A")
+    today = datetime.now(ZoneInfo("America/Los_Angeles")).strftime("%A")
     conn = get_connection()
     cursor = conn.cursor()
     cursor.execute("SELECT resource_id, day_of_week, open_time, close_time, is_closed FROM hours WHERE day_of_week = %s", (today,))
@@ -107,8 +108,9 @@ def get_open_now():
     """
         Returns all available resources that are currently open. 
     """
-    today = datetime.now().strftime("%A")
-    current_time = datetime.now().strftime("%H:%M:%S")
+    now = datetime.now(ZoneInfo("America/Los_Angeles"))
+    today = now.strftime("%A")
+    current_time = now.strftime("%H:%M:%S")
 
     conn = get_connection()
     cursor = conn.cursor()
