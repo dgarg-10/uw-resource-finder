@@ -3,6 +3,7 @@ import FilterTabs from "./components/FilterTabs";
 import ResourceCard from "./components/ResourceCard";
 import ResourceModal from "./components/ResourceModal";
 import SearchBar from "./components/SearchBar";
+import uwphoto from "./assets/uwlogo.png"
 import {
   getAllResources,
   getTodayHours,
@@ -141,7 +142,10 @@ function App(){
   if (loading) {
     return (
       <div className="app">
-        <div className="loading">Loading campus resources, this may take a moment</div>
+        <div className="loading-screen">
+          <div className="loading">Loading campus resources, this may take a moment</div>
+          <img className="loading" src={uwphoto}/>
+        </div>
       </div>
     );
   }
