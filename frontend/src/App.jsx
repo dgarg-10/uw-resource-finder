@@ -144,11 +144,7 @@ function App(){
       <div className="app">
         <div className="loading-screen">
           <div className="loading">Loading campus resources, this may take a moment</div>
-<<<<<<< HEAD
           <img className="loading" src={uwphoto}/>
-=======
-          <img className="loading" src="../uwlogo.png"/>
->>>>>>> 2547a87c8e57180959e4938673bbe3db78a70c3c
         </div>
       </div>
     );
