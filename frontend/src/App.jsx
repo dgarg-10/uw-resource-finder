@@ -141,7 +141,10 @@ function App(){
   if (loading) {
     return (
       <div className="app">
-        <div className="loading">Loading campus resources, this may take a moment</div>
+        <div className="loading-screen">
+          <div className="loading">Loading campus resources, this may take a moment</div>
+          <img className="loading" src="../uwlogo.png"/>
+        </div>
       </div>
     );
   }

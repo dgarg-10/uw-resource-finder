@@ -435,7 +435,8 @@ body {
   align-items: center;
   height: 60vh;
   color: var(--text-muted);
-  font-size: 0.9rem;
+  font-size: 1.3rem;
+  margin-bottom: 0.5rem;
 }
 
 .error {
@@ -482,4 +483,16 @@ body {
 .time-toggle:hover {
   color: var(--text-primary);
   background: var(--border);
+}
+
+.loading-photo {
+  align-items: center;
+}
+
+.loading-screen {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 60vh;
 }
