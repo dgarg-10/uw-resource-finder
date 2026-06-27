@@ -602,3 +602,22 @@ body {
   color: var(--text-primary);
   white-space: pre-wrap;
 }
+
+.smart-suggest-loading {
+  margin-top: 12px;
+  padding: 12px;
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.smart-suggest-error {
+  margin-top: 12px;
+  padding: 12px;
+  background: var(--status-closed-bg);
+  color: var(--status-closed);
+  border-radius: var(--radius-md);
+  font-size: 0.85rem;
+  line-height: 1.5;
+}

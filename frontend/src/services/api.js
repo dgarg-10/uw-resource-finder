@@ -75,15 +75,37 @@ export async function addFavorite(userId, resourceId) {
 }
 
 export async function getRecommendation(query) {
-  const response = await fetch(`${API_URL}/recommend`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ query }),
-  });
-  if (!response.ok) {
-      throw new Error("Failed to get recommendation");
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 30000);
+
+  try {
+      const response = await fetch(`${API_URL}/recommend`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ query }),
+          signal: controller.signal,
+      });
+
+      clearTimeout(timeoutId);
+
+      if (response.status === 429) {
+          throw new Error("RATE_LIMITED");
+      }
+
+      if (!response.ok) {
+          throw new Error("SERVER_ERROR");
+      }
+
+      return response.json();
+  } catch (err) {
+      clearTimeout(timeoutId);
+
+      if (err.name === "AbortError") {
+          throw new Error("TIMEOUT");
+      }
+
+      throw err;
   }
-  return response.json();
 }
 
 export async function removeFavorite(userId, resourceId) {

@@ -6,18 +6,26 @@ function SmartSuggest() {
     const [recommendation, setRecommendation] = useState("");
     const [loading, setLoading] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
+    const [error, setError] = useState("");
 
     async function handleSubmit() {
         if (!query.trim()) return;
 
         setLoading(true);
         setRecommendation("");
+        setError("");
 
         try {
             const data = await getRecommendation(query);
             setRecommendation(data.recommendation);
         } catch (err) {
-            setRecommendation("Sorry, I couldn't get a recommendation right now. Try again later.");
+            if (err.message === "TIMEOUT") {
+                setError("The request took too long. The AI service might be busy — try again in a moment.");
+            } else if (err.message === "RATE_LIMITED") {
+                setError("You've made too many requests. Please wait a minute before trying again.");
+            } else {
+                setError("Something went wrong. The AI service might be temporarily unavailable.");
+            }
         }
 
         setLoading(false);
@@ -44,6 +52,7 @@ function SmartSuggest() {
                         setIsOpen(false);
                         setRecommendation("");
                         setQuery("");
+                        setError("");
                     }}
                 >
                     ✕
@@ -59,17 +68,28 @@ function SmartSuggest() {
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
                     onKeyDown={(e) => {
-                        if (e.key === "Enter") handleSubmit();
+                        if (e.key === "Enter" && !loading) handleSubmit();
                     }}
+                    disabled={loading}
                 />
                 <button
                     className="suggest-btn"
                     onClick={handleSubmit}
                     disabled={loading}
                 >
-                    {loading ? "..." : "Ask"}
+                    {loading ? "Thinking..." : "Ask"}
                 </button>
             </div>
+            {loading && (
+                <div className="smart-suggest-loading">
+                    Finding the best spots for you...
+                </div>
+            )}
+            {error && (
+                <div className="smart-suggest-error">
+                    {error}
+                </div>
+            )}
             {recommendation && (
                 <div className="recommendation">
                     {recommendation}
