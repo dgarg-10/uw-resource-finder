@@ -1,6 +1,6 @@
 # UW Campus Resource Finder
 
-A full-stack web app that helps University of Washington students find on-campus resources, with real-time open/closed status, Husky Card access indicators, favoriting, and Google Maps integration.
+A full-stack web app that helps University of Washington students find on-campus resources, with real-time open/closed status, Husky Card access indicators, favoriting, AI-powered recommendations, and Google Maps integration.
 
 🔗 <https://uw-resources.vercel.app/>
 
@@ -13,24 +13,26 @@ A full-stack web app that helps University of Washington students find on-campus
 ## Features
 
 - Search and Filter resources by category
-- Real-time open/clsoed status based on current time
+- Real-time open/closed status based on current time
 - Favoriting capability with persistence
 - Google Map integration to display resource location
 - Dining resources all have a link to their website present 
+- AI-powered Smart Suggest that provides options based on your prompt
 
 ## Tech stack
 
-- **Frontend:** React, TypeScript, Vite
+- **Frontend:** React, JavaScript, Vite
 - **Backend:** Flask (Python)
 - **Database:** PostgreSQL via Supabase
 - **Deployment:** Vercel (frontend), Render (backend)
+- **AI:** Anthropic API 
 
 ## Architecture
 
 ```
-React + Vite (Vercel)  →  Flask API (Render)  →  Supabase Postgres
-                                ↓
-                       Google Maps API
+React + Vite (Vercel)  →      Flask API (Render)          →  Supabase Postgres
+                                ↓              ↓
+                       Google Maps API   Anthropic API
 ```
 
 ## Running locally
@@ -51,7 +53,10 @@ npm install
 npm run dev
 ```
 
-You need to set up a database URL in your .env for backend/.env. You note this by writing DATABASE_URL=your_url_here. 
+You need to set up a database URL and an Anthropic API Key in backend/.env. You note this by writing DATABASE_URL=your_url_here, and by ANTHROPIC_API_KEY=your_key_here.
+
+
+The frontend runs on `http://localhost:5173` and expects the backend on `http://localhost:5001`.
 
 
 ## What I learned
@@ -64,3 +69,10 @@ I also learned about how to decide between choosing Supabase over self-hosting P
 I picked Supabase for the managed Postgres instance, hosted dashboard, and built-in auth. This creates a tradeoff, as I have a free-tier limit, but the underlying database 
 is still standard Postgres if I ever need to migrate.
 
+## Technical Decisions 
+
+For the AI recommendations, I implemented a RAG (Retrieval-Augmented Generation) pattern rather than letting Claude answer from its training data alone. On each request, the backend retrieves all building data and current-day hours from PostgreSQL, formats it into a system prompt with the current Pacific Time, and sends it to Claude Sonnet. This grounds every recommendation in real data, so the model knows exactly what's open right now instead of guessing from potentially outdated training knowledge.
+
+I applied different rate limits depending on the endpoint — 100 requests/minute as a default across the API, but 10 requests/minute on the `/api/recommend` endpoint specifically to control Anthropic API costs. The rate limiter returns structured JSON errors so the frontend can show the user a specific "too many requests" message rather than a generic failure.
+
+Favorites are stored in PostgreSQL but identified by a randomly generated browser ID saved in localStorage rather than requiring user authentication. The tradeoff is that favorites don't sync across devices, but for a campus tool where most students access it from one device, avoiding a full auth system with huge overhead.
