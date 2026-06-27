@@ -74,6 +74,18 @@ export async function addFavorite(userId, resourceId) {
     return response.json();
 }
 
+export async function getRecommendation(query) {
+  const response = await fetch(`${API_URL}/recommend`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ query }),
+  });
+  if (!response.ok) {
+      throw new Error("Failed to get recommendation");
+  }
+  return response.json();
+}
+
 export async function removeFavorite(userId, resourceId) {
     const response = await fetch(`${API_URL}/favorites`, {
       method: "DELETE",

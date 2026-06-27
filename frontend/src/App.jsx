@@ -4,6 +4,7 @@ import ResourceCard from "./components/ResourceCard";
 import ResourceModal from "./components/ResourceModal";
 import SearchBar from "./components/SearchBar";
 import uwphoto from "./assets/uwlogo.png"
+import SmartSuggest from "./components/SmartSuggest"
 import {
   getAllResources,
   getTodayHours,
@@ -186,6 +187,8 @@ function App(){
           onToggleHuskyAccess={() => setHuskyAccessFilter(!huskyAccessFilter)}
       />
       <SearchBar value={searchQuery} onChange={setSearchQuery} />
+
+      <SmartSuggest />
 
       <div className="resource-grid">
         {filtered.length > 0 ? (

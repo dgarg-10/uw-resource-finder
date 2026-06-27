@@ -1,5 +1,6 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
+from recommend import get_recommendation
 from db import (
     get_all_resources,
     get_resource_by_id,
@@ -71,6 +72,21 @@ def remove_fav():
 @app.route("/api/favorites/<user_id>", methods=["GET"])
 def list_favorites(user_id):
     return jsonify(get_favorites(user_id))
+
+@app.route("/api/recommend", methods=["POST"])
+def recommend():
+    data = request.get_json()
+    query = data.get("query", "")
+    if not query:
+        return jsonify({"error": "No query provided"}), 400
+
+    try:
+        recommendation = get_recommendation(query)
+        return jsonify({"recommendation": recommendation})
+    except Exception as e:
+        print(f"Recommendation error: {e}")
+        return jsonify({"error": "Failed to get recommendation"}), 500
+
 
 if __name__ == "__main__":
     app.run(debug=True, port=5001)
