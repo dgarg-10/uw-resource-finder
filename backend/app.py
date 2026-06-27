@@ -12,6 +12,9 @@ from db import (
     add_favorite,
     remove_favorite
 )
+from flask_limiter import Limiter
+from flask_limiter.util import get_remote_address
+
 
 app = Flask(__name__)
 CORS(app, resources={r"/api/*": {"origins": [
@@ -19,6 +22,17 @@ CORS(app, resources={r"/api/*": {"origins": [
     "https://uw-resource-finder-virid.vercel.app",
     "https://uw-resources.vercel.app"
 ]}})
+
+limiter = Limiter(
+    get_remote_address,
+    app=app,
+    default_limits=["100 per minute"],
+    storage_uri="memory://"
+)
+
+@app.errorhandler(429)
+def ratelimit_handler(e):
+    return jsonify({"error": "Too many requests. Please wait a moment and try again."}), 429
 
 @app.route("/api/resources", methods=["GET"])
 def list_resources():
@@ -74,6 +88,7 @@ def list_favorites(user_id):
     return jsonify(get_favorites(user_id))
 
 @app.route("/api/recommend", methods=["POST"])
+@limiter.limit("10 per minute")
 def recommend():
     data = request.get_json()
     query = data.get("query", "")
