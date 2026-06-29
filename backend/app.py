@@ -14,6 +14,17 @@ from db import (
 )
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
+import sentry_sdk
+import os
+import logging
+
+sentry_sdk.init(
+    dsn=os.environ.get("SENTRY_DSN"),
+    traces_sample_rate=0.2,
+    send_default_pii=False,
+)
+
+logger = logging.getLogger(__name__)
 
 
 app = Flask(__name__)
@@ -99,8 +110,10 @@ def recommend():
         recommendation = get_recommendation(query)
         return jsonify({"recommendation": recommendation})
     except Exception as e:
-        print(f"Recommendation error: {e}")
+        logger.error(f"Recommendation failed: {e}", exc_info=True)
         return jsonify({"error": "Failed to get recommendation"}), 500
+
+
 
 
 if __name__ == "__main__":
