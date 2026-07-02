@@ -39,8 +39,8 @@ React + Vite (Vercel)  →      Flask API (Render)          →  Supabase Postgr
 
 ```bash
 # Clone the repo
-git clone https://github.com//.git
-cd 
+git clone https://github.com/dgarg-10/uw-resource-finder.git
+cd uw-resource-finder
 
 # Backend setup
 cd backend
