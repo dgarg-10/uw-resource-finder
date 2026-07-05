@@ -8,7 +8,8 @@ A full-stack web app that helps University of Washington students find on-campus
 
 ## Screenshot
 
-<img width="864" height="864" alt="Resource-Finder" src="https://github.com/user-attachments/assets/aac7834e-85e4-499c-bdf0-87e39d39f2e4" />
+<img width="864" height="864" alt="Image" src="https://github.com/user-attachments/assets/3702ae62-ca47-426d-b1a2-8fb83cef8992" />
+
 
 ## Features
 
