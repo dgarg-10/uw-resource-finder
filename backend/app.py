@@ -29,7 +29,7 @@ logger = logging.getLogger(__name__)
 
 app = Flask(__name__)
 CORS(app, resources={r"/api/*": {"origins": [
-    "http://localhost:5173",
+    "http://localhost:5174",
     "https://uw-resource-finder-virid.vercel.app",
     "https://uw-resources.vercel.app"
 ]}})

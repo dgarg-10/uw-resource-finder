@@ -57,7 +57,7 @@ npm run dev
 You need to set up a database URL and an Anthropic API Key in backend/.env. You note this by writing DATABASE_URL=your_url_here, and by ANTHROPIC_API_KEY=your_key_here.
 
 
-The frontend runs on `http://localhost:5173` and expects the backend on `http://localhost:5001`.
+The frontend runs on `http://localhost:5174` and expects the backend on `http://localhost:5001`.
 
 
 ## What I learned

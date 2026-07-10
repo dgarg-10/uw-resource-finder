@@ -551,6 +551,17 @@ body {
   margin-bottom: 10px;
 }
 
+.smart-suggest-limit-warning {
+  margin-bottom: 10px;
+  padding: 10px 12px;
+  background: #7f1d1d;
+  color: #fecaca;
+  border-radius: var(--radius-md);
+  font-size: 0.8rem;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
 .smart-suggest-input {
   display: flex;
   gap: 8px;
