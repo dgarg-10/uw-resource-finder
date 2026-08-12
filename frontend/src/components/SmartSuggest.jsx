@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { getRecommendation } from "../services/api";
 
-const DAILY_LIMIT = 3;
+const DAILY_LIMIT = 2;
 const USAGE_STORAGE_KEY = "smartSuggestUsage";
 
 // Requests reset at midnight Pacific time, regardless of the user's own timezone.
