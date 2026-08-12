@@ -4,7 +4,6 @@ A full-stack web app that helps University of Washington students find on-campus
 
 🔗 <https://uw-resources.vercel.app/>
 
-> Note: the backend is hosted on Render's free tier and may take ~30 seconds to wake up on the first request.
 
 ## Screenshot
 
